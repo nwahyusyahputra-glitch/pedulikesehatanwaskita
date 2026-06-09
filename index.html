@@ -402,6 +402,7 @@
         #bmi-kalkulator .container,
         #tips .container {
             max-width: 1500px;
+            padding: 0 30px;
         }
 
         .sec-header {
@@ -3398,27 +3399,69 @@
         </div>
     </section>
     <!-- TES KELELAHAN KERJA SECTION -->
+    <style>
+        .campaign-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+        .campaign-text {
+            text-align: left;
+            padding-right: 20px;
+        }
+        .campaign-text h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 992px) {
+            .campaign-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            .campaign-text {
+                text-align: center;
+                padding-right: 0;
+            }
+            .campaign-text h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
     <section class="section-padding" id="campaign"
-        style="background-color: var(--white); min-height: 100vh; display: flex; align-items: center;">
+        style="background-color: var(--white); min-height: 100vh; display: flex; align-items: center; padding: 40px 0;">
         <div class="container">
-            <div class="sec-header">
-                <span class="sec-label">Edukasi K3</span>
-                <h2 class="sec-title">Kampanye Keselamatan dan Kesehatan Kerja</h2>
-                <p style="margin-top: 15px; color: var(--tm); font-size: 16px; max-width: 600px; margin-inline: auto;">
-                    Edukasi visual untuk menumbuhkan budaya Keselamatan dan Kesehatan Kerja (K3) demi terciptanya
-                    lingkungan kerja yang aman dan produktif.</p>
-                <div style="margin-top: 25px; display: flex; justify-content: center;">
+            <div class="campaign-layout">
+                <!-- Kiri: Teks & Tombol -->
+                <div class="campaign-text">
+                    <span class="sec-label" style="display: inline-block; margin-bottom: 12px;">Edukasi K3</span>
+                    <h2 class="sec-title" style="margin-bottom: 20px;">Kampanye Keselamatan & Kesehatan Kerja</h2>
+                    <p style="color: var(--tm); font-size: 18px; line-height: 1.7; margin-bottom: 35px;">
+                        Edukasi visual untuk menumbuhkan budaya Keselamatan dan Kesehatan Kerja (K3) demi terciptanya
+                        lingkungan kerja yang aman, sehat, dan senantiasa produktif bagi seluruh pegawai.
+                    </p>
                     <a href="https://drive.google.com/" target="_blank" class="btn btn-red"
-                        style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; font-size: 14px; text-decoration: none;">
-                        <i class="fa-brands fa-google-drive" style="font-size: 18px;"></i> Tonton Video Peregangan
+                        style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 16px; text-decoration: none; border-radius: 100px; box-shadow: 0 10px 20px rgba(215,25,32,0.2);">
+                        <i class="fa-brands fa-google-drive" style="font-size: 20px;"></i> Tonton Video Peregangan
                     </a>
                 </div>
-            </div>
-            <div style="background: var(--bg); padding: 30px; border-radius: 32px; box-shadow: var(--shadow); border: 2px solid var(--gm); display: flex; justify-content: center; align-items: center; max-width: 1000px; margin: 0 auto; transition: transform 0.3s ease, border-color 0.3s ease;"
-                onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--navy)'"
-                onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--gm)'">
-                <img src="poster (1).png" alt="Poster Kampanye K3L"
-                    style="max-width: 100%; height: auto; border-radius: 16px; display: block; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.12);">
+
+                <!-- Kanan: Poster Interaktif -->
+                <div style="text-align: center; position: relative;">
+                    <div style="font-size: 13px; color: var(--tm); margin-bottom: 15px; font-weight: 700; letter-spacing: 0.5px;">
+                        <i class="fa-solid fa-magnifying-glass-plus" style="color: var(--red);"></i> Arahkan kursor (hover) untuk memperbesar poster
+                    </div>
+                    <div style="background: var(--bg); padding: 15px; border-radius: 24px; box-shadow: var(--shadow); border: 2px solid var(--gm); display: inline-flex; justify-content: center; align-items: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-in; position: relative; z-index: 10;"
+                        onmouseover="this.style.transform='scale(1.5)'; this.style.zIndex='999'; this.style.boxShadow='0 50px 100px rgba(0,0,0,0.4)'; this.style.borderColor='var(--red)';"
+                        onmouseout="this.style.transform='scale(1)'; this.style.zIndex='10'; this.style.boxShadow='var(--shadow)'; this.style.borderColor='var(--gm)';">
+                        <img src="poster (1).png" alt="Poster Kampanye K3L"
+                            style="max-height: 58vh; width: auto; max-width: 100%; border-radius: 12px; display: block; object-fit: contain;">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -4330,14 +4373,12 @@
         /* MEDIA QUERY LAPTOP SCREEN OPTIMIZATION */
         @media (min-width: 992px) {
             #bmi-kalkulator {
-                height: 100vh;
-                min-height: 640px;
-                padding: 0 !important;
+                min-height: 100vh;
+                padding: 100px 0 60px !important;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 box-sizing: border-box;
-                overflow: hidden;
             }
 
             #bmi-kalkulator .container {
@@ -4345,11 +4386,9 @@
                 flex-direction: column;
                 justify-content: center;
                 height: 100%;
-                padding-top: 70px;
-                /* Offset fixed header */
+                padding-top: 20px;
                 padding-bottom: 10px;
                 box-sizing: border-box;
-                max-height: 95vh;
             }
 
             #bmi-kalkulator .consult-header {
@@ -4940,8 +4979,9 @@
         }
     </script>
 
+    <div class="about-footer-wrapper" style="min-height: 100vh; display: flex; flex-direction: column; background: linear-gradient(rgba(7, 20, 38, 0.9), rgba(7, 20, 38, 0.9)), url('833854_1200.jpg') center/cover no-repeat;">
     <section class="section-padding" id="about"
-        style="background: linear-gradient(rgba(7, 20, 38, 0.9), rgba(7, 20, 38, 0.9)), url('833854_1200.jpg') center/cover no-repeat; color: white; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+        style="color: white; flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: auto !important; padding: 40px 0;">
         <div class="container">
             <div class="sec-header">
                 <span class="sec-label" style="color: #ffccd0;">Informasi Perusahaan</span>
@@ -5087,6 +5127,7 @@
             </div>
         </div>
     </footer>
+    </div>
 
     <script>
         // MOBILE MENU LOGIC
@@ -5429,6 +5470,13 @@
                 clearTimeout(audioTimeout);
                 audioTimeout = null;
             }
+            if (activeOscillators && activeOscillators.length > 0) {
+                activeOscillators.forEach(o => {
+                    if (o.stop) try { o.stop(); } catch(e){}
+                    if (o.interval) clearInterval(o.interval);
+                });
+                activeOscillators = [];
+            }
         }
 
         function playAlarm() {
@@ -5438,12 +5486,36 @@
 
             stopAllSounds();
 
+            // Normal audio playback
             const soundUrl = SOUNDS[type] || SOUNDS.radar;
-
             activeAudio = new Audio(soundUrl);
             activeAudio.volume = vol;
-            activeAudio.loop = true; // Loop so it doesn't stop too early
+            activeAudio.loop = true;
             activeAudio.play().catch(e => console.log('Audio play failed:', e));
+
+            // Web Audio API bypass for DND mode
+            if (audioCtx) {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                // Beep pattern to bypass DND
+                const beepInterval = setInterval(() => {
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
+                    const o = audioCtx.createOscillator();
+                    const g = audioCtx.createGain();
+                    o.type = 'square';
+                    o.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch
+                    o.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+                    g.gain.setValueAtTime(vol, audioCtx.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                    o.connect(g);
+                    g.connect(audioCtx.destination);
+                    o.start();
+                    o.stop(audioCtx.currentTime + 0.5);
+                    activeOscillators.push(o);
+                }, 1000); // 1 beep per second
+                
+                activeOscillators.push({ interval: beepInterval });
+            }
 
             const stopTime = dur === -1 ? 15000 : dur * 1000;
 
@@ -6076,6 +6148,147 @@
         }
     </script>
 
+    <!-- GLOBAL RESPONSIVE SCALING (SMART TV, SPLIT SCREEN, MOBILE) -->
+    <style>
+        /* 1. LAPTOP & SMART TV FIX (Full Screen Per Section) */
+        @media (min-width: 992px) {
+            /* Ensure every section is exactly 1 full screen */
+            section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+            .section-padding { min-height: 100vh; }
+            .bmi-container, .fatigue-grid, .consult-grid-main { max-width: 100% !important; width: 100% !important; }
+        }
+
+        /* Make layout wider on large screens (Monitors & TVs) to reduce empty side margins */
+        @media (min-width: 1440px) {
+            .container { max-width: 94% !important; }
+            .header-container { max-width: 95% !important; }
+            #fatigue-test .container, #consultation .container, #bmi-kalkulator .container { max-width: 96% !important; }
+            .bmi-container, .fatigue-grid, .consult-grid-main { max-width: 100% !important; }
+            .hero-content { max-width: 1600px !important; }
+            .hero p { max-width: 1000px !important; }
+        }
+
+        /* Target 4K Smart TVs and Ultra-Wide Projectors Only (Will NOT affect normal laptops) */
+        @media (min-width: 2500px) {
+            .container, .header-container, .hero-content {
+                zoom: 1.8; /* Fill the 4K TV screen perfectly */
+            }
+        }
+        
+        @media (min-width: 3500px) {
+            .container, .header-container, .hero-content {
+                zoom: 2.5;
+            }
+        }
+
+        /* 2. SPLIT SCREEN & TABLET OPTIMIZATION */
+        @media (max-width: 1024px) {
+            .header-container, .container {
+                padding: 0 30px !important;
+                max-width: 100% !important;
+            }
+            #bmi-kalkulator { height: auto !important; min-height: 100vh !important; overflow: visible !important; }
+            
+            /* Questionnaire / Fatigue Test split-screen fixes */
+            .fatigue-card-wrapper {
+                flex-direction: column !important;
+                height: auto !important;
+                padding: 30px 20px !important;
+            }
+            .fatigue-main {
+                width: 100% !important;
+                padding-right: 0 !important;
+                border-right: none !important;
+                border-bottom: 2px solid var(--gm) !important;
+                padding-bottom: 30px !important;
+                margin-bottom: 30px !important;
+            }
+            .fatigue-sidebar {
+                width: 100% !important;
+                padding-left: 0 !important;
+            }
+            .fatigue-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* BMI Calculator split screen fixes */
+            .bmi-container {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Consultation split screen fixes */
+            .consult-grid-main {
+                grid-template-columns: 1fr !important;
+            }
+            .consult-sidebar {
+                position: relative !important;
+                top: 0 !important;
+                margin-top: 30px !important;
+            }
+
+            .dash-layout, .timer-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* 3. MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px !important;
+            }
+            .sec-title {
+                font-size: 28px !important;
+            }
+            .header-container {
+                grid-template-columns: 1fr auto !important;
+                padding: 0 20px !important;
+            }
+            nav {
+                display: none !important;
+            }
+            .quick-access {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 90%;
+            }
+            .qa-btn {
+                font-size: 11px;
+                padding: 8px 16px;
+            }
+            
+            /* Kuesioner (Fatigue Test) Mobile Fixes */
+            .question-item {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 15px !important;
+            }
+            .options-group {
+                width: 100% !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+            }
+            .option-btn {
+                flex: 1 1 calc(50% - 8px) !important;
+                text-align: center !important;
+                padding: 12px 8px !important;
+            }
+            .step-text {
+                display: none !important;
+            }
+            .fatigue-stepper {
+                gap: 5px !important;
+            }
+            .step-connector {
+                margin: 0 5px !important;
+            }
+        }
+        
+        /* Force container constraints to never break viewport */
+        * {
+            max-width: 100vw;
+        }
+    </style>
 </body>
 
 </html>
