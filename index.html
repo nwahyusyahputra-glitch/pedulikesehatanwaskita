@@ -95,11 +95,11 @@
 
         .header-container {
             width: 100%;
-            max-width: 1440px;
+            max-width: 100% !important;
             margin: 0 auto;
-            padding: 0 40px;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             height: 100%;
         }
@@ -127,17 +127,16 @@
         .header-right {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            gap: 20px;
+            gap: 15px;
         }
 
         .live-clock {
             background: var(--bg);
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 12px;
             font-family: 'Inter', monospace;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 13px;
             color: var(--navy);
             display: flex;
             align-items: center;
@@ -1110,7 +1109,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             header {
                 height: 80px;
             }
@@ -1169,11 +1168,21 @@
             }
 
             .header-right {
+                display: flex;
+                align-items: center;
                 gap: 10px;
             }
 
             .live-clock {
-                display: none;
+                font-size: 10px;
+                padding: 6px 10px;
+                gap: 5px;
+            }
+            @media (max-width: 400px) {
+                .live-clock {
+                    font-size: 8.5px;
+                    padding: 4px 8px;
+                }
             }
 
             .nav-cta {
@@ -2085,7 +2094,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .fatigue-section {
                 padding: 40px 0 !important;
             }
@@ -2644,115 +2653,7 @@
             max-width: 100%;
         }
 
-        /* ── TABLET LANDSCAPE & PORTRAIT (768px – 1023px) ── */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .container {
-                padding: 0 24px;
-            }
 
-            .section-padding {
-                padding: 50px 0;
-            }
-
-            /* Header */
-            .header-container {
-                padding: 0 24px;
-            }
-
-            nav {
-                gap: 14px;
-            }
-
-            nav a {
-                font-size: 10px;
-                letter-spacing: 0.8px;
-            }
-
-            .live-clock {
-                font-size: 11px;
-                padding: 8px 12px;
-            }
-
-            /* Hero */
-            .hero {
-                padding: 90px 24px 50px;
-            }
-
-            .hero h1 {
-                font-size: 52px;
-            }
-
-            .hero p {
-                font-size: 15px;
-            }
-
-            /* Timer */
-            .timer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .timer-text-side {
-                padding-right: 0 !important;
-            }
-
-            .timer-text-side h2 {
-                font-size: 30px !important;
-            }
-
-            /* Dashboard */
-            .dash-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-cards {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
-            }
-
-            .stat-card {
-                padding: 24px;
-            }
-
-            .stat-card .val {
-                font-size: 40px;
-            }
-
-            /* Tips / Stretching */
-            .stretch-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .edu-cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            /* Consultation */
-            .consultation-layout {
-                grid-template-columns: 1fr !important;
-            }
-
-            #consultation {
-                min-height: auto !important;
-                padding-top: 80px;
-                padding-bottom: 40px;
-            }
-
-            /* About */
-            .about-layout {
-                grid-template-columns: 1fr !important;
-                gap: 30px !important;
-            }
-
-            /* Fatigue */
-            .identity-form-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .literature-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
 
         /* ── SMALL TABLET / LARGE PHONE (481px – 767px) ── */
         @media (min-width: 481px) and (max-width: 767px) {
@@ -2829,7 +2730,7 @@
         }
 
         /* ── OVERFLOW SAFETY NET for all inline grids ── */
-        @media (max-width: 767px) {
+        @media (max-width: 1024px) {
 
             [style*="grid-template-columns: 1.2fr 1fr"],
             [style*="grid-template-columns: 1fr 1.1fr"],
@@ -3065,14 +2966,17 @@
             <nav>
                 <a href="#top">Beranda</a>
                 <a href="#tips">Panduan K3L</a>
+                <a href="#campaign">Kampanye</a>
                 <a id="nav-fatigue-link" href="#fatigue-test">Tes Kelelahan</a>
                 <a href="#bmi-kalkulator">Kalkulator BMI</a>
                 <a href="#consultation">Konsultasi</a>
-                <a href="#campaign">Kampanye</a>
                 <a href="#about">Tentang</a>
             </nav>
             <div class="header-right">
-
+                <div class="live-clock" id="live-clock">
+                    <i class="fa-regular fa-clock" style="color: var(--red);"></i>
+                    <span>Memuat Waktu...</span>
+                </div>
                 <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
                     <span></span>
                     <span></span>
@@ -3427,9 +3331,47 @@
                 font-size: 28px;
             }
         }
+        .campaign-poster-wrapper {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--gm);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: zoom-in;
+            position: relative;
+            z-index: 10;
+        }
+        .campaign-poster-wrapper:hover {
+            transform: scale(1.4);
+            z-index: 999;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.4);
+            border-color: var(--red);
+        }
+        .campaign-poster-wrapper img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 12px;
+            display: block;
+            object-fit: contain;
+        }
+        @media (max-width: 1024px) {
+            .campaign-poster-wrapper:hover {
+                transform: scale(1.05); /* Minimal zoom on mobile */
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            }
+            .campaign-poster-wrapper img {
+                max-height: 70vh;
+            }
+        }
     </style>
     <section class="section-padding" id="campaign"
-        style="background-color: var(--white); min-height: 100vh; display: flex; align-items: center; padding: 40px 0;">
+        style="background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('IMG_2960.jpg') center/cover fixed; min-height: 100vh; display: flex; align-items: center; padding: 40px 0;">
         <div class="container">
             <div class="campaign-layout">
                 <!-- Kiri: Teks & Tombol -->
@@ -3447,15 +3389,12 @@
                 </div>
 
                 <!-- Kanan: Poster Interaktif -->
-                <div style="text-align: center; position: relative;">
+                <div style="text-align: center; position: relative; display: flex; flex-direction: column; align-items: center;">
                     <div style="font-size: 13px; color: var(--tm); margin-bottom: 15px; font-weight: 700; letter-spacing: 0.5px;">
                         <i class="fa-solid fa-magnifying-glass-plus" style="color: var(--red);"></i> Arahkan kursor (hover) untuk memperbesar poster
                     </div>
-                    <div style="background: var(--bg); padding: 15px; border-radius: 24px; box-shadow: var(--shadow); border: 2px solid var(--gm); display: inline-flex; justify-content: center; align-items: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-in; position: relative; z-index: 10;"
-                        onmouseover="this.style.transform='scale(1.5)'; this.style.zIndex='999'; this.style.boxShadow='0 50px 100px rgba(0,0,0,0.4)'; this.style.borderColor='var(--red)';"
-                        onmouseout="this.style.transform='scale(1)'; this.style.zIndex='10'; this.style.boxShadow='var(--shadow)'; this.style.borderColor='var(--gm)';">
-                        <img src="poster (1).png" alt="Poster Kampanye K3L"
-                            style="max-height: 58vh; width: auto; max-width: 100%; border-radius: 12px; display: block; object-fit: contain;">
+                    <div class="campaign-poster-wrapper">
+                        <img src="poster (1).png" alt="Poster Kampanye K3L">
                     </div>
                 </div>
             </div>
@@ -4096,7 +4035,7 @@
             box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             #consultation {
                 padding: 60px 0;
             }
@@ -5089,7 +5028,7 @@
             text-align: right;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .footer-layout {
                 flex-direction: column;
                 text-align: center;
@@ -5209,7 +5148,7 @@
         // CLOCK
         function updateClock() {
             const now = new Date();
-            const options = { timeZone: 'Asia/Jakarta', weekday: 'long', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const options = { timeZone: 'Asia/Jakarta', weekday: 'long', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
             const clockEl = document.querySelector('#live-clock span');
             if (clockEl) clockEl.innerText = now.toLocaleString('id-ID', options) + ' WIB';
         }
@@ -5217,14 +5156,53 @@
 
 
 
+        // WAKE LOCK API (Mencegah Layar Sleep)
+        let wakeLock = null;
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    wakeLock.addEventListener('release', () => console.log('Wake Lock dilepas'));
+                }
+            } catch (err) { console.error('Wake Lock error:', err.name, err.message); }
+        }
+        function releaseWakeLock() {
+            if (wakeLock !== null) {
+                wakeLock.release().then(() => wakeLock = null);
+            }
+        }
+        // Auto-renew wake lock if user switches back to tab
+        document.addEventListener('visibilitychange', async () => {
+            if (wakeLock !== null && document.visibilityState === 'visible') {
+                await requestWakeLock();
+            }
+        });
+
+        // WEB WORKER (Mencegah Throttling di Background Tab)
+        const workerBlob = new Blob([`
+            let timerId = null;
+            self.onmessage = function(e) {
+                if (e.data === 'start') {
+                    if(!timerId) timerId = setInterval(() => self.postMessage('tick'), 1000);
+                } else if (e.data === 'stop') {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+            }
+        `], { type: 'application/javascript' });
+        const timerWorker = new Worker(URL.createObjectURL(workerBlob));
+        timerWorker.onmessage = function(e) { if(e.data === 'tick') tick(); };
+
         // TIMER LOGIC
         function toggleTimer() {
             initAudio(); // Initialize audio on user gesture
             if (state.running) {
-                clearInterval(timerInterval);
+                timerWorker.postMessage('stop');
+                releaseWakeLock();
                 document.getElementById('btn-start').innerText = 'Lanjutkan';
             } else {
-                timerInterval = setInterval(tick, 1000);
+                timerWorker.postMessage('start');
+                requestWakeLock();
                 document.getElementById('btn-start').innerText = 'Jeda';
             }
             state.running = !state.running;
@@ -5239,7 +5217,7 @@
         }
 
         function handleTimerEnd() {
-            clearInterval(timerInterval);
+            timerWorker.postMessage('stop');
             state.running = false;
 
             if (!state.isBreak) {
@@ -5257,6 +5235,7 @@
                 playAlarm();
                 updateDasbor();
                 document.getElementById('btn-start').innerText = 'Mulai';
+                releaseWakeLock(); // Lepas wake lock jika tidak otomatis lanjut
             }
             saveState();
             updateDisplay();
@@ -5269,8 +5248,9 @@
             state.seconds = 20;
             state.totalSeconds = 20;
             state.running = true;
-            clearInterval(timerInterval);
-            timerInterval = setInterval(tick, 1000);
+            timerWorker.postMessage('stop');
+            timerWorker.postMessage('start');
+            requestWakeLock();
             updateDisplay();
         }
 
@@ -5279,8 +5259,9 @@
             state.seconds = 60;
             state.totalSeconds = 60;
             state.running = true;
-            clearInterval(timerInterval);
-            timerInterval = setInterval(tick, 1000);
+            timerWorker.postMessage('stop');
+            timerWorker.postMessage('start');
+            requestWakeLock();
             updateDisplay();
         }
 
@@ -5291,10 +5272,12 @@
             state.totalSeconds = 20 * 60;
             updateDisplay();
             saveState();
+            releaseWakeLock();
         }
 
         function resetTimer() {
-            clearInterval(timerInterval);
+            timerWorker.postMessage('stop');
+            releaseWakeLock();
             stopAllSounds(); // Stop alarm if playing
             state.running = false;
             state.isBreak = false;
@@ -6157,19 +6140,35 @@
         /* Make layout wider on large screens (Monitors & TVs) to reduce empty side margins */
         @media (min-width: 1440px) {
             .container { max-width: 94% !important; }
-            .header-container { max-width: 95% !important; }
             #fatigue-test .container, #consultation .container, #bmi-kalkulator .container { max-width: 96% !important; }
             .bmi-container, .fatigue-grid, .consult-grid-main { max-width: 100% !important; }
             .hero-content { max-width: 1600px !important; }
             .hero p { max-width: 1000px !important; }
         }
 
+
+
+        /* Target 1080p Smart TVs */
+        /* Target 1080p Smart TVs */
+        @media (min-width: 1900px) and (max-width: 2499px) {
+            .container, .header-container, .hero-content {
+                zoom: 1.3; /* Scale up proportionally to fill the screen */
+            }
+            .campaign-poster-wrapper:hover {
+                transform: scale(1.03) !important; /* Reduce zoom intensity on large screens */
+            }
+        }
+
         /* Target 4K Smart TVs and Ultra-Wide Projectors Only (Will NOT affect normal laptops) */
         @media (min-width: 2500px) {
             .container, .header-container, .hero-content {
-                zoom: 1.8; /* Fill the 4K TV screen perfectly */
+                zoom: 1.7; /* Fill the 4K TV screen perfectly */
+            }
+            .campaign-poster-wrapper:hover {
+                transform: scale(1.03) !important;
             }
         }
+
         
         @media (min-width: 3500px) {
             .container, .header-container, .hero-content {
@@ -6228,20 +6227,14 @@
         }
 
         /* 3. MOBILE OPTIMIZATION */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .hero h1 {
                 font-size: 42px !important;
             }
             .sec-title {
                 font-size: 28px !important;
             }
-            .header-container {
-                grid-template-columns: 1fr auto !important;
-                padding: 0 20px !important;
-            }
-            nav {
-                display: none !important;
-            }
+
             .quick-access {
                 flex-wrap: wrap;
                 justify-content: center;
