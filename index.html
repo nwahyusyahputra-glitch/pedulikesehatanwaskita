@@ -3462,11 +3462,21 @@
             z-index: 10;
         }
 
-        .campaign-poster-wrapper:hover {
+        @media (hover: hover) {
+            .campaign-poster-wrapper:hover {
+                transform: scale(1.4);
+                z-index: 999;
+                box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4);
+                border-color: var(--red);
+            }
+        }
+
+        .campaign-poster-wrapper.active-zoom {
             transform: scale(1.4);
             z-index: 999;
             box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4);
             border-color: var(--red);
+            cursor: zoom-out;
         }
 
         .campaign-poster-wrapper img {
@@ -3480,10 +3490,17 @@
         }
 
         @media (max-width: 1024px) {
-            .campaign-poster-wrapper:hover {
+            @media (hover: hover) {
+                .campaign-poster-wrapper:hover {
+                    transform: scale(1.05);
+                    /* Minimal zoom on mobile */
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+                }
+            }
+            .campaign-poster-wrapper.active-zoom {
                 transform: scale(1.05);
-                /* Minimal zoom on mobile */
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+                cursor: zoom-out;
             }
 
             .campaign-poster-wrapper img {
@@ -3515,9 +3532,9 @@
                     <div
                         style="font-size: 13px; color: var(--tm); margin-bottom: 15px; font-weight: 700; letter-spacing: 0.5px;">
                         <i class="fa-solid fa-magnifying-glass-plus" style="color: var(--red);"></i> Arahkan kursor
-                        (hover) untuk memperbesar poster
+                        (hover) atau klik untuk memperbesar poster
                     </div>
-                    <div class="campaign-poster-wrapper">
+                    <div class="campaign-poster-wrapper" onclick="this.classList.toggle('active-zoom')">
                         <img src="poster (1).png" alt="Poster Kampanye K3L">
                     </div>
                 </div>
