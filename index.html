@@ -1178,6 +1178,7 @@
                 padding: 6px 10px;
                 gap: 5px;
             }
+
             @media (max-width: 400px) {
                 .live-clock {
                     font-size: 8.5px;
@@ -2941,6 +2942,97 @@
                 grid-template-columns: 1fr !important;
             }
         }
+
+        /* HEADER MOBILE OPTIMIZATION (ALL BRANDS) */
+        @media (max-width: 768px) {
+            header {
+                height: 70px !important;
+            }
+            .header-container {
+                padding: 0 15px !important;
+                gap: 10px !important;
+            }
+            .logo-area {
+                gap: 8px !important;
+                flex: 1;
+                min-width: 0;
+            }
+            .logo-area img {
+                height: 38px !important;
+            }
+            .logo-divider {
+                height: 28px !important;
+                margin: 0 8px !important;
+            }
+            .logo-text span:first-child {
+                font-size: 11px !important;
+            }
+            .logo-text span:last-child {
+                font-size: 7px !important;
+            }
+            .live-clock {
+                font-size: 10px !important;
+                padding: 6px 10px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                height: 60px !important;
+            }
+            .header-container {
+                padding: 0 10px !important;
+                gap: 5px !important;
+            }
+            .logo-area {
+                gap: 5px !important;
+            }
+            .logo-area img {
+                height: 32px !important;
+            }
+            /* Hide the small text on very small screens to prevent overlap */
+            .logo-text span:last-child {
+                display: none !important;
+            }
+            .logo-text span:first-child {
+                font-size: 10px !important;
+                line-height: 1 !important;
+                white-space: normal !important;
+            }
+            .logo-divider {
+                height: 20px !important;
+                margin: 0 5px !important;
+            }
+            .header-right {
+                gap: 5px !important;
+            }
+            .live-clock {
+                font-size: 8.5px !important;
+                padding: 5px 6px !important;
+                gap: 4px !important;
+            }
+            .menu-toggle {
+                padding: 6px !important;
+            }
+            .menu-toggle span {
+                width: 20px !important;
+                height: 2.5px !important;
+                margin-bottom: 2px !important;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .logo-text {
+                display: none !important;
+            }
+            .logo-divider {
+                display: none !important;
+            }
+            .live-clock {
+                font-size: 8px !important;
+                padding: 4px 6px !important;
+            }
+        }
     </style>
 </head>
 
@@ -3308,29 +3400,35 @@
             max-width: 1240px;
             margin: 0 auto;
         }
+
         .campaign-text {
             text-align: left;
             padding-right: 20px;
         }
+
         .campaign-text h2 {
             font-size: clamp(32px, 4vw, 48px);
             line-height: 1.2;
             margin-bottom: 20px;
         }
+
         @media (max-width: 992px) {
             .campaign-layout {
                 grid-template-columns: 1fr;
                 gap: 30px;
                 text-align: center;
             }
+
             .campaign-text {
                 text-align: center;
                 padding-right: 0;
             }
+
             .campaign-text h2 {
                 font-size: 28px;
             }
         }
+
         .campaign-poster-wrapper {
             background: var(--bg);
             padding: 15px;
@@ -3345,12 +3443,14 @@
             position: relative;
             z-index: 10;
         }
+
         .campaign-poster-wrapper:hover {
             transform: scale(1.4);
             z-index: 999;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.4);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4);
             border-color: var(--red);
         }
+
         .campaign-poster-wrapper img {
             width: auto;
             height: auto;
@@ -3360,11 +3460,14 @@
             display: block;
             object-fit: contain;
         }
+
         @media (max-width: 1024px) {
             .campaign-poster-wrapper:hover {
-                transform: scale(1.05); /* Minimal zoom on mobile */
-                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+                transform: scale(1.05);
+                /* Minimal zoom on mobile */
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             }
+
             .campaign-poster-wrapper img {
                 max-height: 70vh;
             }
@@ -3389,9 +3492,12 @@
                 </div>
 
                 <!-- Kanan: Poster Interaktif -->
-                <div style="text-align: center; position: relative; display: flex; flex-direction: column; align-items: center;">
-                    <div style="font-size: 13px; color: var(--tm); margin-bottom: 15px; font-weight: 700; letter-spacing: 0.5px;">
-                        <i class="fa-solid fa-magnifying-glass-plus" style="color: var(--red);"></i> Arahkan kursor (hover) untuk memperbesar poster
+                <div
+                    style="text-align: center; position: relative; display: flex; flex-direction: column; align-items: center;">
+                    <div
+                        style="font-size: 13px; color: var(--tm); margin-bottom: 15px; font-weight: 700; letter-spacing: 0.5px;">
+                        <i class="fa-solid fa-magnifying-glass-plus" style="color: var(--red);"></i> Arahkan kursor
+                        (hover) untuk memperbesar poster
                     </div>
                     <div class="campaign-poster-wrapper">
                         <img src="poster (1).png" alt="Poster Kampanye K3L">
@@ -4914,154 +5020,162 @@
         }
     </script>
 
-    <div class="about-footer-wrapper" style="min-height: 100vh; display: flex; flex-direction: column; background: linear-gradient(rgba(7, 20, 38, 0.9), rgba(7, 20, 38, 0.9)), url('833854_1200.jpg') center/cover no-repeat;">
-    <section class="section-padding" id="about"
-        style="color: white; flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: auto !important; padding: 40px 0;">
-        <div class="container">
-            <div class="sec-header">
-                <span class="sec-label" style="color: #ffccd0;">Informasi Perusahaan</span>
-                <h2 class="sec-title" style="color: white;">Tentang Program</h2>
-            </div>
-            <div class="about-layout"
-                style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: start;">
-                <div class="about-text">
-                    <p style="font-size: 16px; line-height: 1.8; opacity: 0.8; margin-bottom: 24px;">Waskita Peduli
-                        Kesehatan adalah portal kesehatan digital terintegrasi yang menghadirkan fitur pengingat
-                        istirahat metode 20-20-20, kuesioner tes kelelahan kerja, panduan ergonomi dan posisi bekerja
-                        yang benar, kalkulator BMI, media edukasi kampanye K3, serta akses cepat untuk konsultasi medis
-                        dengan Klinik Pelayanan Kesehatan Kerja Waskita.</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px;">
-                            <i class="fa-solid fa-shield-halved"
-                                style="font-size: 28px; color: var(--red); margin-bottom: 14px; display:block;"></i>
-                            <h5 style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Standar K3L</h5>
-                            <p style="font-size: 13px; opacity: 0.6; line-height: 1.6;">Sesuai dengan regulasi kesehatan
-                                kerja
-                                internasional (NIOSH/OSHA).</p>
+    <div class="about-footer-wrapper"
+        style="min-height: 100vh; display: flex; flex-direction: column; background: linear-gradient(rgba(7, 20, 38, 0.9), rgba(7, 20, 38, 0.9)), url('833854_1200.jpg') center/cover no-repeat;">
+        <section class="section-padding" id="about"
+            style="color: white; flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: auto !important; padding: 40px 0;">
+            <div class="container">
+                <div class="sec-header">
+                    <span class="sec-label" style="color: #ffccd0;">Informasi Perusahaan</span>
+                    <h2 class="sec-title" style="color: white;">Tentang Program</h2>
+                </div>
+                <div class="about-layout"
+                    style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: start;">
+                    <div class="about-text">
+                        <p style="font-size: 16px; line-height: 1.8; opacity: 0.8; margin-bottom: 24px;">Waskita Peduli
+                            Kesehatan adalah portal kesehatan digital terintegrasi yang menghadirkan fitur pengingat
+                            istirahat metode 20-20-20, kuesioner tes kelelahan kerja, panduan ergonomi dan posisi
+                            bekerja
+                            yang benar, kalkulator BMI, media edukasi kampanye K3, serta akses cepat untuk konsultasi
+                            medis
+                            dengan Klinik Pelayanan Kesehatan Kerja Waskita.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px;">
+                                <i class="fa-solid fa-shield-halved"
+                                    style="font-size: 28px; color: var(--red); margin-bottom: 14px; display:block;"></i>
+                                <h5 style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Standar K3L</h5>
+                                <p style="font-size: 13px; opacity: 0.6; line-height: 1.6;">Sesuai dengan regulasi
+                                    kesehatan
+                                    kerja
+                                    internasional (NIOSH/OSHA).</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px;">
+                                <i class="fa-solid fa-microchip"
+                                    style="font-size: 28px; color: var(--red); margin-bottom: 14px; display:block;"></i>
+                                <h5 style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Pemantauan Digital
+                                </h5>
+                                <p style="font-size: 13px; opacity: 0.6; line-height: 1.6;">Evaluasi kepatuhan istirahat
+                                    mata secara
+                                    real-time bagi karyawan.</p>
+                            </div>
                         </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px;">
-                            <i class="fa-solid fa-microchip"
-                                style="font-size: 28px; color: var(--red); margin-bottom: 14px; display:block;"></i>
-                            <h5 style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Pemantauan Digital</h5>
-                            <p style="font-size: 13px; opacity: 0.6; line-height: 1.6;">Evaluasi kepatuhan istirahat
-                                mata secara
-                                real-time bagi karyawan.</p>
+                    </div>
+
+                    <div class="about-contact"
+                        style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px;">
+                        <div style="margin-bottom: 20px;">
+                            <div
+                                style="font-size: 11px; font-weight: 800; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
+                                Kantor Pusat</div>
+                            <div style="display: flex; gap: 14px; align-items: start;">
+                                <i class="fa-solid fa-location-dot"
+                                    style="color: var(--red); font-size: 16px; margin-top: 4px;"></i>
+                                <p style="font-size: 15px; line-height: 1.6;">Gedung Waskita Karya, Jl. MT. Haryono No.
+                                    Kav.
+                                    10, Cawang, Jakarta Timur 13340</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <div
+                                style="font-size: 11px; font-weight: 800; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
+                                Telepon</div>
+                            <div style="display: flex; gap: 14px; align-items: center;">
+                                <i class="fa-solid fa-phone" style="color: var(--red); font-size: 16px;"></i>
+                                <p style="font-size: 15px;">(021) 8508510 / 8508520</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div
+                                style="font-size: 11px; font-weight: 800; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
+                                Website Resmi</div>
+                            <div style="display: flex; gap: 14px; align-items: center;">
+                                <i class="fa-solid fa-globe" style="color: var(--red); font-size: 16px;"></i>
+                                <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://investor.waskita.co.id/&ved=2ahUKEwiGgc773rCUAxXtzDgGHbVUEdcQFnoECA0QAQ&usg=AOvVaw1q0LdMP9rDwUdNVaxYIQLD"
+                                    target="_blank" rel="noopener noreferrer"
+                                    style="color: white; font-size: 15px; text-decoration: none; border-bottom: 1px solid var(--red);">investor.waskita.co.id</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="about-contact"
-                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px;">
-                    <div style="margin-bottom: 20px;">
-                        <div
-                            style="font-size: 11px; font-weight: 800; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
-                            Kantor Pusat</div>
-                        <div style="display: flex; gap: 14px; align-items: start;">
-                            <i class="fa-solid fa-location-dot"
-                                style="color: var(--red); font-size: 16px; margin-top: 4px;"></i>
-                            <p style="font-size: 15px; line-height: 1.6;">Gedung Waskita Karya, Jl. MT. Haryono No. Kav.
-                                10, Cawang, Jakarta Timur 13340</p>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 20px;">
-                        <div
-                            style="font-size: 11px; font-weight: 800; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
-                            Telepon</div>
-                        <div style="display: flex; gap: 14px; align-items: center;">
-                            <i class="fa-solid fa-phone" style="color: var(--red); font-size: 16px;"></i>
-                            <p style="font-size: 15px;">(021) 8508510 / 8508520</p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div
-                            style="font-size: 11px; font-weight: 800; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
-                            Website Resmi</div>
-                        <div style="display: flex; gap: 14px; align-items: center;">
-                            <i class="fa-solid fa-globe" style="color: var(--red); font-size: 16px;"></i>
-                            <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://investor.waskita.co.id/&ved=2ahUKEwiGgc773rCUAxXtzDgGHbVUEdcQFnoECA0QAQ&usg=AOvVaw1q0LdMP9rDwUdNVaxYIQLD"
-                                target="_blank" rel="noopener noreferrer"
-                                style="color: white; font-size: 15px; text-decoration: none; border-bottom: 1px solid var(--red);">investor.waskita.co.id</a>
-                        </div>
+        <div class="overlay" id="break-overlay">
+            <div class="popup">
+                <div class="popup-img"></div>
+                <div class="popup-content">
+                    <div class="popup-title">Saatnya Mengistirahatkan Mata</div>
+                    <div class="popup-desc">Alihkan pandangan Anda ke objek sejauh ±6 meter selama 20 detik untuk
+                        merilekskan otot mata dan mengurangi ketegangan akibat layar.</div>
+                    <div class="popup-btns">
+                        <button class="p-btn p-btn-red" onclick="startBreak()">MULAI ISTIRAHAT</button>
+                        <button class="p-btn p-btn-gray" onclick="postponeBreak()">TUNDA 1 MENIT</button>
+                        <button class="p-btn p-btn-gray" style="background: none;" onclick="skipBreak()">Lewati
+                            Istirahat
+                            Ini</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <div class="overlay" id="break-overlay">
-        <div class="popup">
-            <div class="popup-img"></div>
-            <div class="popup-content">
-                <div class="popup-title">Saatnya Mengistirahatkan Mata</div>
-                <div class="popup-desc">Alihkan pandangan Anda ke objek sejauh ±6 meter selama 20 detik untuk
-                    merilekskan otot mata dan mengurangi ketegangan akibat layar.</div>
-                <div class="popup-btns">
-                    <button class="p-btn p-btn-red" onclick="startBreak()">MULAI ISTIRAHAT</button>
-                    <button class="p-btn p-btn-gray" onclick="postponeBreak()">TUNDA 1 MENIT</button>
-                    <button class="p-btn p-btn-gray" style="background: none;" onclick="skipBreak()">Lewati Istirahat
-                        Ini</button>
-                </div>
+        <div id="ft">
+            <div style="flex: 1;">
+                <div id="ft-status">BEKERJA</div>
+                <div id="ft-time">20:00</div>
             </div>
+            <i class="fa-solid fa-grip-vertical" style="opacity: 0.3;"></i>
+            <div id="ft-prog"></div>
         </div>
-    </div>
 
-    <div id="ft">
-        <div style="flex: 1;">
-            <div id="ft-status">BEKERJA</div>
-            <div id="ft-time">20:00</div>
-        </div>
-        <i class="fa-solid fa-grip-vertical" style="opacity: 0.3;"></i>
-        <div id="ft-prog"></div>
-    </div>
-
-    <style>
-        .footer-layout {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .footer-layout .right-text {
-            text-align: right;
-        }
-
-        @media (max-width: 1024px) {
+        <style>
             .footer-layout {
-                flex-direction: column;
-                text-align: center;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
             }
 
             .footer-layout .right-text {
-                text-align: center;
+                text-align: right;
             }
-        }
-    </style>
-    <footer style="background: var(--navy-d); padding: 30px 0; color: white; border-top: 4px solid var(--red);">
-        <div class="container">
-            <div class="footer-layout">
-                <div>
-                    <div
-                        style="font-weight: 900; font-size: 16px; letter-spacing: 1px; color: white; opacity: 0.9; margin-bottom: 2px; font-family: 'Montserrat', sans-serif;">
-                        Waskita Peduli Kesehatan
+
+            @media (max-width: 1024px) {
+                .footer-layout {
+                    flex-direction: column;
+                    text-align: center;
+                }
+
+                .footer-layout .right-text {
+                    text-align: center;
+                }
+            }
+        </style>
+        <footer style="background: var(--navy-d); padding: 30px 0; color: white; border-top: 4px solid var(--red);">
+            <div class="container">
+                <div class="footer-layout">
+                    <div>
+                        <div
+                            style="font-weight: 900; font-size: 16px; letter-spacing: 1px; color: white; opacity: 0.9; margin-bottom: 2px; font-family: 'Montserrat', sans-serif;">
+                            Waskita Peduli Kesehatan
+                        </div>
+                        <div style="font-size: 13px; font-weight: 600; color: var(--red); margin-bottom: 8px;">
+                            Manajemen Mutu dan K3L
+                        </div>
+                        <p style="font-size: 10px; opacity: 0.5; font-weight: 700; letter-spacing: 2px;">
+                            SISTEM PEMANTAUAN KESEHATAN KERJA DIGITAL
+                        </p>
                     </div>
-                    <div style="font-size: 13px; font-weight: 600; color: var(--red); margin-bottom: 8px;">
-                        Manajemen Mutu dan K3L
+                    <div class="right-text">
+                        <h3 style="font-weight: 900; font-size: 15px; color: var(--red);">HIDUP SEHAT #BERAWALDARIKITA
+                        </h3>
+                        <p style="font-size: 12px; opacity: 0.6; margin-top: 5px; font-weight: 600;">Program K3L Digital
+                            Internal PT Waskita Karya (Persero) Tbk.</p>
                     </div>
-                    <p style="font-size: 10px; opacity: 0.5; font-weight: 700; letter-spacing: 2px;">
-                        SISTEM PEMANTAUAN KESEHATAN KERJA DIGITAL
-                    </p>
-                </div>
-                <div class="right-text">
-                    <h3 style="font-weight: 900; font-size: 15px; color: var(--red);">HIDUP SEHAT #BERAWALDARIKITA</h3>
-                    <p style="font-size: 12px; opacity: 0.6; margin-top: 5px; font-weight: 600;">Program K3L Digital
-                        Internal PT Waskita Karya (Persero) Tbk.</p>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
     </div>
 
     <script>
@@ -5191,7 +5305,7 @@
             }
         `], { type: 'application/javascript' });
         const timerWorker = new Worker(URL.createObjectURL(workerBlob));
-        timerWorker.onmessage = function(e) { if(e.data === 'tick') tick(); };
+        timerWorker.onmessage = function (e) { if (e.data === 'tick') tick(); };
 
         // TIMER LOGIC
         function toggleTimer() {
@@ -5451,7 +5565,7 @@
             }
             if (activeOscillators && activeOscillators.length > 0) {
                 activeOscillators.forEach(o => {
-                    if (o.stop) try { o.stop(); } catch(e){}
+                    if (o.stop) try { o.stop(); } catch (e) { }
                     if (o.interval) clearInterval(o.interval);
                 });
                 activeOscillators = [];
@@ -5475,7 +5589,7 @@
             // Web Audio API bypass for DND mode
             if (audioCtx) {
                 if (audioCtx.state === 'suspended') audioCtx.resume();
-                
+
                 // Beep pattern to bypass DND
                 const beepInterval = setInterval(() => {
                     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -5492,7 +5606,7 @@
                     o.stop(audioCtx.currentTime + 0.5);
                     activeOscillators.push(o);
                 }, 1000); // 1 beep per second
-                
+
                 activeOscillators.push({ interval: beepInterval });
             }
 
@@ -6131,19 +6245,52 @@
     <style>
         /* 1. LAPTOP & SMART TV FIX (Full Screen Per Section) */
         @media (min-width: 992px) {
+
             /* Ensure every section is exactly 1 full screen */
-            section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-            .section-padding { min-height: 100vh; }
-            .bmi-container, .fatigue-grid, .consult-grid-main { max-width: 100% !important; width: 100% !important; }
+            section {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .section-padding {
+                min-height: 100vh;
+            }
+
+            .bmi-container,
+            .fatigue-grid,
+            .consult-grid-main {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
         }
 
         /* Make layout wider on large screens (Monitors & TVs) to reduce empty side margins */
         @media (min-width: 1440px) {
-            .container { max-width: 94% !important; }
-            #fatigue-test .container, #consultation .container, #bmi-kalkulator .container { max-width: 96% !important; }
-            .bmi-container, .fatigue-grid, .consult-grid-main { max-width: 100% !important; }
-            .hero-content { max-width: 1600px !important; }
-            .hero p { max-width: 1000px !important; }
+            .container {
+                max-width: 94% !important;
+            }
+
+            #fatigue-test .container,
+            #consultation .container,
+            #bmi-kalkulator .container {
+                max-width: 96% !important;
+            }
+
+            .bmi-container,
+            .fatigue-grid,
+            .consult-grid-main {
+                max-width: 100% !important;
+            }
+
+            .hero-content {
+                max-width: 1600px !important;
+            }
+
+            .hero p {
+                max-width: 1000px !important;
+            }
         }
 
 
@@ -6151,45 +6298,67 @@
         /* Target 1080p Smart TVs */
         /* Target 1080p Smart TVs */
         @media (min-width: 1900px) and (max-width: 2499px) {
-            .container, .header-container, .hero-content {
-                zoom: 1.3; /* Scale up proportionally to fill the screen */
+
+            .container,
+            .header-container,
+            .hero-content {
+                zoom: 1.3;
+                /* Scale up proportionally to fill the screen */
             }
+
             .campaign-poster-wrapper:hover {
-                transform: scale(1.03) !important; /* Reduce zoom intensity on large screens */
+                transform: scale(1.03) !important;
+                /* Reduce zoom intensity on large screens */
             }
         }
 
         /* Target 4K Smart TVs and Ultra-Wide Projectors Only (Will NOT affect normal laptops) */
         @media (min-width: 2500px) {
-            .container, .header-container, .hero-content {
-                zoom: 1.7; /* Fill the 4K TV screen perfectly */
+
+            .container,
+            .header-container,
+            .hero-content {
+                zoom: 1.7;
+                /* Fill the 4K TV screen perfectly */
             }
+
             .campaign-poster-wrapper:hover {
                 transform: scale(1.03) !important;
             }
         }
 
-        
+
         @media (min-width: 3500px) {
-            .container, .header-container, .hero-content {
+
+            .container,
+            .header-container,
+            .hero-content {
                 zoom: 2.5;
             }
         }
 
         /* 2. SPLIT SCREEN & TABLET OPTIMIZATION */
         @media (max-width: 1024px) {
-            .header-container, .container {
+
+            .header-container,
+            .container {
                 padding: 0 30px !important;
                 max-width: 100% !important;
             }
-            #bmi-kalkulator { height: auto !important; min-height: 100vh !important; overflow: visible !important; }
-            
+
+            #bmi-kalkulator {
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow: visible !important;
+            }
+
             /* Questionnaire / Fatigue Test split-screen fixes */
             .fatigue-card-wrapper {
                 flex-direction: column !important;
                 height: auto !important;
                 padding: 30px 20px !important;
             }
+
             .fatigue-main {
                 width: 100% !important;
                 padding-right: 0 !important;
@@ -6198,30 +6367,34 @@
                 padding-bottom: 30px !important;
                 margin-bottom: 30px !important;
             }
+
             .fatigue-sidebar {
                 width: 100% !important;
                 padding-left: 0 !important;
             }
+
             .fatigue-grid {
                 grid-template-columns: 1fr !important;
             }
-            
+
             /* BMI Calculator split screen fixes */
             .bmi-container {
                 grid-template-columns: 1fr !important;
             }
-            
+
             /* Consultation split screen fixes */
             .consult-grid-main {
                 grid-template-columns: 1fr !important;
             }
+
             .consult-sidebar {
                 position: relative !important;
                 top: 0 !important;
                 margin-top: 30px !important;
             }
 
-            .dash-layout, .timer-grid {
+            .dash-layout,
+            .timer-grid {
                 grid-template-columns: 1fr !important;
             }
         }
@@ -6231,6 +6404,7 @@
             .hero h1 {
                 font-size: 42px !important;
             }
+
             .sec-title {
                 font-size: 28px !important;
             }
@@ -6240,39 +6414,45 @@
                 justify-content: center;
                 width: 90%;
             }
+
             .qa-btn {
                 font-size: 11px;
                 padding: 8px 16px;
             }
-            
+
             /* Kuesioner (Fatigue Test) Mobile Fixes */
             .question-item {
                 flex-direction: column !important;
                 align-items: flex-start !important;
                 gap: 15px !important;
             }
+
             .options-group {
                 width: 100% !important;
                 display: flex !important;
                 flex-wrap: wrap !important;
                 gap: 8px !important;
             }
+
             .option-btn {
                 flex: 1 1 calc(50% - 8px) !important;
                 text-align: center !important;
                 padding: 12px 8px !important;
             }
+
             .step-text {
                 display: none !important;
             }
+
             .fatigue-stepper {
                 gap: 5px !important;
             }
+
             .step-connector {
                 margin: 0 5px !important;
             }
         }
-        
+
         /* Force container constraints to never break viewport */
         * {
             max-width: 100vw;
