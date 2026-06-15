@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Waskita Peduli Kesehatan - Portal digital untuk memantau, menjaga, dan meningkatkan kesehatan pekerja secara proaktif.">
+    <meta name="description"
+        content="Waskita Peduli Kesehatan - Portal digital untuk memantau, menjaga, dan meningkatkan kesehatan pekerja secara proaktif.">
     <title>Waskita Peduli Kesehatan – Hidup Sehat #BerawalDariKita</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
@@ -52,8 +53,9 @@
         }
 
         /* Optimize Scroll Performance */
-        body.is-scrolling * {
-            pointer-events: none !important;
+        body.is-scrolling .stretch-card,
+        body.is-scrolling .stat-card {
+            pointer-events: none;
         }
 
         img,
@@ -1126,7 +1128,7 @@
             .logo-area img {
                 height: 38px !important;
             }
-            
+
             .logo-divider {
                 height: 28px !important;
                 margin: 0 8px !important;
@@ -1135,7 +1137,7 @@
             .logo-text span:first-child {
                 font-size: 11px !important;
             }
-            
+
             .logo-text span:last-child {
                 font-size: 7px !important;
             }
@@ -1174,7 +1176,7 @@
                 border-bottom: 1px solid var(--gm);
                 display: block;
             }
-            
+
             nav a:last-child {
                 border-bottom: none;
             }
@@ -2805,22 +2807,14 @@
             }
         }
 
-        /* 5. Long Word Wrapping Prevention */
+        /* 5. Long Word Wrapping Prevention - hanya untuk elemen teks, bukan tombol/heading utama */
         p,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        a,
-        span,
-        div {
+        li,
+        td,
+        th,
+        label {
             overflow-wrap: break-word;
             word-wrap: break-word;
-            word-break: break-word;
-            hyphens: auto;
-            -webkit-hyphens: auto;
         }
 
 
@@ -2960,28 +2954,35 @@
             header {
                 height: 70px !important;
             }
+
             .header-container {
                 padding: 0 15px !important;
                 gap: 10px !important;
             }
+
             .logo-area {
                 gap: 8px !important;
                 flex: 1;
                 min-width: 0;
             }
+
             .logo-area img {
                 height: 38px !important;
             }
+
             .logo-divider {
                 height: 28px !important;
                 margin: 0 8px !important;
             }
+
             .logo-text span:first-child {
                 font-size: 11px !important;
             }
+
             .logo-text span:last-child {
                 font-size: 7px !important;
             }
+
             .live-clock {
                 font-size: 10px !important;
                 padding: 6px 10px !important;
@@ -2992,54 +2993,66 @@
             header {
                 height: 60px !important;
             }
+
             .header-container {
                 padding: 0 10px !important;
                 gap: 5px !important;
             }
+
             .logo-area {
                 gap: 5px !important;
             }
+
             .logo-area img {
                 height: 32px !important;
             }
+
             /* Hide the small text on very small screens to prevent overlap */
             .logo-text span:last-child {
                 display: none !important;
             }
+
             .logo-text span:first-child {
                 font-size: 10px !important;
                 line-height: 1 !important;
                 white-space: normal !important;
             }
+
             .logo-divider {
                 height: 20px !important;
                 margin: 0 5px !important;
             }
+
             .header-right {
                 gap: 5px !important;
             }
+
             .live-clock {
                 font-size: 8.5px !important;
                 padding: 5px 6px !important;
                 gap: 4px !important;
             }
+
             .menu-toggle {
                 padding: 6px !important;
             }
+
             .menu-toggle span {
                 width: 20px !important;
                 height: 2.5px !important;
                 margin-bottom: 2px !important;
             }
         }
-        
+
         @media (max-width: 380px) {
             .logo-text {
                 display: none !important;
             }
+
             .logo-divider {
                 display: none !important;
             }
+
             .live-clock {
                 font-size: 8px !important;
                 padding: 4px 6px !important;
@@ -3098,8 +3111,8 @@
                 <div class="hero-tagline">Hidup Sehat #BerawalDariKita</div>
                 <h1>Waskita <span>Peduli</span> Kesehatan</h1>
                 <p style="margin-left: auto; margin-right: auto; max-width: 800px;">Mendukung produktivitas dan
-                    kesejahteraan pegawai melalui sistem pengingat istirahat (Metode 20-20-20), pemantauan kelelahan,
-                    kalkulator BMI, layanan konsultasi medis, serta edukasi K3 terintegrasi.</p>
+                    kesejahteraan pegawai melalui panduan K3L, kampanye keselamatan, sistem pengingat istirahat (Metode
+                    20-20-20), tes kelelahan, kalkulator BMI, serta layanan konsultasi terintegrasi.</p>
                 <div class="hero-btns">
                     <button class="btn btn-red" onclick="scrollToId('timer')">Mulai Sekarang</button>
                     <button class="btn btn-ghost" onclick="scrollToId('about')">Tentang Program</button>
@@ -3439,7 +3452,7 @@
             .campaign-text h2 {
                 font-size: 28px;
             }
-            
+
             #campaign {
                 background-attachment: scroll !important;
                 min-height: auto !important;
@@ -3497,6 +3510,7 @@
                     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
                 }
             }
+
             .campaign-poster-wrapper.active-zoom {
                 transform: scale(1.05);
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -5519,7 +5533,7 @@
             if (dashSesi) dashSesi.innerText = state.sesi;
             if (dashBreak) dashBreak.innerText = state.breaks;
 
-            const pct = state.running && state.sesi > 0 ? Math.round((state.breaks / state.sesi) * 100) : 0;
+            const pct = state.sesi > 0 ? Math.round((state.breaks / state.sesi) * 100) : 0;
             if (dashPct) dashPct.innerText = pct + '%';
 
             // Update today's data in history (0-4 for Mon-Fri)
@@ -5527,7 +5541,8 @@
             if (day >= 1 && day <= 5) {
                 state.history[day - 1] = state.sesi;
                 if (chart) {
-                    chart.data.datasets[0].data = state.history;
+                    chart.data.datasets[0].data = [...state.history];
+                    chart.data.datasets[1].data = state.history.map((v, i) => i === day - 1 ? state.breaks : 0);
                     chart.update();
                 }
             }
@@ -5690,10 +5705,10 @@
             });
         }, { passive: true });
 
-        window.addEventListener('mouseup', () => {
+        window.addEventListener('mouseup', (e) => {
             if (isDragging) {
-                const dx = event.clientX - startX;
-                const dy = event.clientY - startY;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
                 ft.style.left = (startLeft + dx) + 'px';
                 ft.style.top = (startTop + dy) + 'px';
                 ft.style.right = 'auto';
@@ -6489,8 +6504,9 @@
         }
 
         /* Force container constraints to never break viewport */
-        * {
+        html, body {
             max-width: 100vw;
+            overflow-x: hidden;
         }
     </style>
 </body>
