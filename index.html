@@ -6319,7 +6319,22 @@
             }
         }
 
-
+        /* Gentle proportional zoom for very large screens (Smart TVs) to ensure it's not too small */
+        @media (min-width: 1600px) {
+            body {
+                zoom: 1.15;
+            }
+        }
+        @media (min-width: 2000px) {
+            body {
+                zoom: 1.25;
+            }
+        }
+        @media (min-width: 3000px) {
+            body {
+                zoom: 1.5;
+            }
+        }
 
         /* 2. SPLIT SCREEN & TABLET OPTIMIZATION */
         @media (max-width: 1024px) {
