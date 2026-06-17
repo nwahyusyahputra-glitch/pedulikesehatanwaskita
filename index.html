@@ -228,7 +228,8 @@
         }
 
         .hero-content {
-            max-width: 1200px;
+            max-width: 100%;
+            padding: 0 30px;
             z-index: 10;
             margin: 0 auto;
             display: flex;
@@ -392,7 +393,7 @@
         }
 
         .container {
-            max-width: 1240px;
+            max-width: 100%;
             margin: 0 auto;
             padding: 0 30px;
             width: 100%;
@@ -403,7 +404,7 @@
         #consultation .container,
         #bmi-kalkulator .container,
         #tips .container {
-            max-width: 1500px;
+            max-width: 100%;
             padding: 0 30px;
         }
 
@@ -1437,7 +1438,7 @@
             padding: 24px 32px;
             box-shadow: var(--shadow);
             margin-bottom: 30px;
-            max-width: 1440px;
+            max-width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -3422,7 +3423,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
-            max-width: 1240px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
@@ -6319,13 +6320,13 @@
         /* Make layout wider on large screens (Monitors & TVs) to reduce empty side margins */
         @media (min-width: 1440px) {
             .container {
-                max-width: 94% !important;
+                max-width: 100% !important;
             }
 
             #fatigue-test .container,
             #consultation .container,
             #bmi-kalkulator .container {
-                max-width: 96% !important;
+                max-width: 100% !important;
             }
 
             .bmi-container,
@@ -6335,7 +6336,7 @@
             }
 
             .hero-content {
-                max-width: 1600px !important;
+                max-width: 100% !important;
             }
 
             .hero p {
@@ -6504,7 +6505,8 @@
         }
 
         /* Force container constraints to never break viewport */
-        html, body {
+        html,
+        body {
             max-width: 100vw;
             overflow-x: hidden;
         }
