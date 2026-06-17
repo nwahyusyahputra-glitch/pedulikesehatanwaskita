@@ -175,21 +175,47 @@
 
         nav {
             display: flex;
-            gap: 20px;
-            align-items: center;
-            justify-content: center;
+            position: fixed;
+            top: 0;
+            right: -280px;
+            left: auto;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(11, 31, 58, 0.08);
+            flex-direction: column;
             margin: 0;
+            padding: calc(80px + env(safe-area-inset-top)) 20px 30px;
+            gap: 15px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+            z-index: 999;
+            align-items: center;
+            text-align: center;
+        }
+
+        nav.active {
+            right: 0;
+            left: auto;
         }
 
         nav a {
             text-decoration: none;
-            font-size: 11px;
+            font-size: 15px;
             font-weight: 800;
             color: var(--tm);
             transition: color 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             position: relative;
+            width: 85%;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gm);
+        }
+
+        nav a:last-child {
+            border-bottom: none;
         }
 
         nav a::after {
@@ -1026,7 +1052,7 @@
 
         /* Hamburger Menu Toggle */
         .menu-toggle {
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 6px;
             cursor: pointer;
@@ -1077,7 +1103,7 @@
             }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             nav {
                 gap: 15px;
                 margin: 0 20px;
@@ -1149,40 +1175,7 @@
                 display: flex;
             }
 
-            nav {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                margin: 0;
-                padding: 30px 20px;
-                gap: 15px;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                z-index: 999;
-                align-items: center;
-                text-align: center;
-            }
 
-            nav.active {
-                left: 0;
-            }
-
-            nav a {
-                font-size: 15px;
-                width: 85%;
-                padding: 14px 0;
-                border-bottom: 1px solid var(--gm);
-                display: block;
-            }
-
-            nav a:last-child {
-                border-bottom: none;
-            }
 
             .header-right {
                 display: flex;
@@ -1391,7 +1384,7 @@
             padding-right: 40px;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             .timer-text-side {
                 padding-right: 0;
                 text-align: center;
@@ -1485,8 +1478,9 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 25px;
-            max-width: 1000px;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
@@ -1525,6 +1519,7 @@
             color: var(--tm);
             text-align: center;
             transition: color 0.3s ease;
+            white-space: nowrap;
         }
 
         .stepper-line {
@@ -1537,18 +1532,13 @@
         }
 
         .stepper-line-1 {
-            left: 12.5%;
-            width: 25%;
+            left: 16.66%;
+            width: 33.33%;
         }
 
         .stepper-line-2 {
-            left: 37.5%;
-            width: 25%;
-        }
-
-        .stepper-line-3 {
-            left: 62.5%;
-            width: 25%;
+            left: 50%;
+            width: 33.33%;
         }
 
         .stepper-step.active .step-num {
@@ -2093,7 +2083,7 @@
             }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             .identity-form-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -2939,7 +2929,7 @@
 
     <style>
         /* Global Responsive & Split Screen Fixes */
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
 
             div[style*="grid-template-columns: 1fr 1fr"],
             div[style*="grid-template-columns: 1.2fr 1fr"],
@@ -3087,6 +3077,7 @@
                 <a href="#top">Beranda</a>
                 <a href="#tips">Panduan K3L</a>
                 <a href="#campaign">Kampanye</a>
+                <a href="#stretching-video">Video Peregangan</a>
                 <a id="nav-fatigue-link" href="#fatigue-test">Tes Kelelahan</a>
                 <a href="#bmi-kalkulator">Kalkulator BMI</a>
                 <a href="#consultation">Konsultasi</a>
@@ -3362,38 +3353,7 @@
 
 
 
-            <!-- MANFAAT SECTION (COMPACT HORIZONTAL) -->
-            <div
-                style="background: white; border-radius: 12px; border: 1px solid var(--gm); padding: 20px; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
-                    <i class="fa-solid fa-chart-line" style="color: var(--red); font-size: 14px;"></i>
-                    <h4
-                        style="font-size: 13px; font-weight: 800; color: var(--navy); margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Manfaat Penerapan K3L</h4>
-                </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <div
-                        style="background: var(--gl); padding: 8px 14px; border-radius: 6px; font-size: 11.5px; color: var(--navy); font-weight: 600; display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
-                        <i class="fa-solid fa-battery-full" style="color: #10b981;"></i> Mengurangi kelelahan kerja
-                    </div>
-                    <div
-                        style="background: var(--gl); padding: 8px 14px; border-radius: 6px; font-size: 11.5px; color: var(--navy); font-weight: 600; display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
-                        <i class="fa-solid fa-face-smile" style="color: #10b981;"></i> Meningkatkan kenyamanan kerja
-                    </div>
-                    <div
-                        style="background: var(--gl); padding: 8px 14px; border-radius: 6px; font-size: 11.5px; color: var(--navy); font-weight: 600; display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
-                        <i class="fa-solid fa-heart-pulse" style="color: #10b981;"></i> Mendukung kesehatan pekerja
-                    </div>
-                    <div
-                        style="background: var(--gl); padding: 8px 14px; border-radius: 6px; font-size: 11.5px; color: var(--navy); font-weight: 600; display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
-                        <i class="fa-solid fa-bullseye" style="color: #10b981;"></i> Menjaga fokus & produktivitas
-                    </div>
-                    <div
-                        style="background: var(--gl); padding: 8px 14px; border-radius: 6px; font-size: 11.5px; color: var(--navy); font-weight: 600; display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
-                        <i class="fa-solid fa-shield" style="color: #10b981;"></i> Lingkungan kerja aman
-                    </div>
-                </div>
-            </div>
+
 
             <!-- REFERENSI (TAGS) -->
             <div
@@ -3440,7 +3400,7 @@
             margin-bottom: 20px;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             .campaign-layout {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -3460,6 +3420,9 @@
                 background-attachment: scroll !important;
                 min-height: auto !important;
                 padding: 60px 0 !important;
+            }
+            #stretching-video {
+                background-attachment: scroll !important;
             }
         }
 
@@ -3533,14 +3496,10 @@
                 <div class="campaign-text">
                     <span class="sec-label" style="display: inline-block; margin-bottom: 12px;">Edukasi K3</span>
                     <h2 class="sec-title" style="margin-bottom: 20px;">Kampanye Keselamatan & Kesehatan Kerja</h2>
-                    <p style="color: var(--tm); font-size: 18px; line-height: 1.7; margin-bottom: 35px;">
+                    <p style="color: var(--tm); font-size: 18px; line-height: 1.7; margin-bottom: 0;">
                         Edukasi visual untuk menumbuhkan budaya Keselamatan dan Kesehatan Kerja (K3) demi terciptanya
                         lingkungan kerja yang aman, sehat, dan senantiasa produktif bagi seluruh pegawai.
                     </p>
-                    <a href="https://drive.google.com/" target="_blank" class="btn btn-red"
-                        style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 16px; text-decoration: none; border-radius: 100px; box-shadow: 0 10px 20px rgba(215,25,32,0.2);">
-                        <i class="fa-brands fa-google-drive" style="font-size: 20px;"></i> Tonton Video Peregangan
-                    </a>
                 </div>
 
                 <!-- Kanan: Poster Interaktif -->
@@ -3555,6 +3514,29 @@
                         <img src="poster (1).png" alt="Poster Kampanye K3L">
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO PEREGANGAN SECTION -->
+    <section class="section-padding" id="stretching-video" style="background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.95)), url('IMG_2961.jpg') center/cover fixed; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; padding-top: 60px; padding-bottom: 60px;">
+        <div class="container">
+            <div class="sec-header" style="margin-bottom: 40px; text-align: center;">
+                <span class="sec-label"
+                    style="display: inline-flex; align-items: center; gap: 8px; font-size: 11px; padding: 6px 14px; background: rgba(225, 29, 72, 0.1); color: var(--red); border-radius: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;"><i
+                        class="fa-solid fa-person-running"></i> Video Peregangan</span>
+                <h2 class="sec-title" style="margin-top: 12px; font-size: 30px; font-weight: 900; color: var(--navy);">
+                    Peregangan Mandiri di Tempat Kerja</h2>
+                <p
+                    style="font-size: 13.5px; color: var(--tm); max-width: 650px; margin: 12px auto 0; line-height: 1.6;">
+                    Luangkan waktu sejenak untuk melakukan peregangan. Ikuti gerakan dalam video ini untuk merelaksasikan otot-otot Anda, mengurangi kelelahan, dan menjaga kebugaran selama bekerja.</p>
+            </div>
+            
+            <div style="max-width: 850px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: 1px solid var(--gm); background: #000; position: relative;">
+                <video controls style="width: 100%; height: auto; display: block;">
+                    <source src="lv_0_20260617132911.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung pemutaran video.
+                </video>
             </div>
         </div>
     </section>
@@ -3597,12 +3579,7 @@
                         <div class="step-num">3</div>
                         <div class="step-text">Hasil</div>
                     </div>
-                    <div class="stepper-line stepper-line-3" id="step-line-3"></div>
 
-                    <div class="stepper-step" id="step-node-4" onclick="if (isStepUnlocked(4)) setKelelahanStep(4)">
-                        <div class="step-num">4</div>
-                        <div class="step-text">Metode & Referensi</div>
-                    </div>
                 </div>
 
                 <!-- STEP 1: IDENTITAS RESPONDEN -->
@@ -3638,9 +3615,12 @@
                                         min="0" max="60" required>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-red" onclick="goToStep2()"
-                                style="width: 100%; padding: 12px; font-size: 13px; border-radius: 10px;">Lanjut ke
-                                Kuesioner <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                            <div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-ghost" onclick="goToStep4()"
+                                    style="flex: 1; min-width: 200px; padding: 12px; font-size: 13px; border-radius: 10px; border: 1.5px solid var(--gm); color: var(--navy); font-weight: 800;">Lihat Metode & Referensi <i class="fa-solid fa-book-open" style="margin-left: 8px;"></i></button>
+                                <button type="button" class="btn btn-red" onclick="goToStep2()"
+                                    style="flex: 1; min-width: 200px; padding: 12px; font-size: 13px; border-radius: 10px;">Lanjut ke Kuesioner <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -3729,12 +3709,11 @@
                             </div>
                             <div class="result-recommendations">
                                 <h4>Rekomendasi Manajemen Kelelahan</h4>
-                                <div class="recom-list">
+                                <div class="recom-list" id="recom-list-container">
                                     <div class="recom-item"><i class="fa-solid fa-bed"></i> Istirahat yang Cukup</div>
                                     <div class="recom-item"><i class="fa-solid fa-child"></i> Lakukan Peregangan</div>
                                     <div class="recom-item"><i class="fa-solid fa-mug-hot"></i> Lakukan Jeda Aktif</div>
-                                    <div class="recom-item"><i class="fa-solid fa-briefcase"></i> Evaluasi Beban Kerja
-                                    </div>
+                                    <div class="recom-item"><i class="fa-solid fa-briefcase"></i> Evaluasi Beban Kerja</div>
                                 </div>
                             </div>
                             <div style="margin-top: 25px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 15px;">
@@ -3935,7 +3914,7 @@
                         </div>
 
                         <div style="margin-top: 30px; text-align: center;">
-                            <button class="btn btn-red" type="button"
+                            <button id="btn-method-action" class="btn btn-red" type="button"
                                 style="width: 100%; max-width: 250px; padding: 12px; font-size: 13px;"
                                 onclick="resetKelelahanForm()">Mulai Ulang <i class="fa-solid fa-rotate-right"
                                     style="margin-left: 8px;"></i></button>
@@ -5788,25 +5767,29 @@
                     el.style.display = (s.num === stepNum) ? 'block' : 'none';
                 }
 
-                const node = document.getElementById(`step-node-${s.num}`);
-                if (node) {
-                    node.classList.remove('active', 'completed');
-                    if (s.num === stepNum) {
-                        node.classList.add('active');
-                    } else if (s.num < stepNum) {
-                        node.classList.add('completed');
+                if (stepNum <= 3) {
+                    const node = document.getElementById(`step-node-${s.num}`);
+                    if (node) {
+                        node.classList.remove('active', 'completed');
+                        if (s.num === stepNum) {
+                            node.classList.add('active');
+                        } else if (s.num < stepNum) {
+                            node.classList.add('completed');
+                        }
                     }
                 }
             });
 
-            // Update stepper connector lines
-            for (let i = 1; i <= 3; i++) {
-                const line = document.getElementById(`step-line-${i}`);
-                if (line) {
-                    if (stepNum > i) {
-                        line.classList.add('completed');
-                    } else {
-                        line.classList.remove('completed');
+            if (stepNum <= 3) {
+                // Update stepper connector lines
+                for (let i = 1; i <= 3; i++) {
+                    const line = document.getElementById(`step-line-${i}`);
+                    if (line) {
+                        if (stepNum > i) {
+                            line.classList.add('completed');
+                        } else {
+                            line.classList.remove('completed');
+                        }
                     }
                 }
             }
@@ -5961,17 +5944,41 @@
             let color = "#10b981"; // green
             let interpretation = "Kondisi fisik dan mental Anda prima. Tetap pertahankan kesehatan fisik dan mental Anda dengan melakukan microbreak secara rutin di sela-sela waktu kerja.";
             let badgeClass = "badge-low";
+            let recomHTML = `
+                <div class="recom-item"><i class="fa-solid fa-child-reaching"></i> Pertahankan Postur Tubuh & Microbreak</div>
+                <div class="recom-item"><i class="fa-solid fa-eye"></i> Terapkan Peregangan Visual (20-20-20)</div>
+                <div class="recom-item"><i class="fa-solid fa-glass-water"></i> Jaga Hidrasi Cairan Tubuh</div>
+                <div class="recom-item"><i class="fa-solid fa-bed"></i> Pertahankan Pola Tidur Sehat</div>
+            `;
 
             if (totalScore >= 24 && totalScore <= 30) {
                 category = "Lelah";
                 color = "#f59e0b"; // yellow/orange
                 badgeClass = "badge-medium";
                 interpretation = "Anda mengalami kelelahan kerja kategori sedang. Direkomendasikan untuk beristirahat 5-10 menit, melakukan peregangan ringan, serta minum air putih secukupnya.";
+                recomHTML = `
+                    <div class="recom-item"><i class="fa-solid fa-bed"></i> Istirahat Wajib (15-30 Menit)</div>
+                    <div class="recom-item"><i class="fa-solid fa-person-running"></i> Lakukan Peregangan & Jeda Aktif</div>
+                    <div class="recom-item"><i class="fa-solid fa-mug-hot"></i> Cukupi Cairan & Nutrisi</div>
+                    <div class="recom-item"><i class="fa-solid fa-arrows-spin"></i> Lakukan Variasi Tugas Pekerjaan</div>
+                `;
             } else if (totalScore > 30) {
                 category = "Sangat Lelah";
                 color = "#D71920"; // red
                 badgeClass = "badge-high";
                 interpretation = "Tingkat kelelahan kerja Anda tergolong sangat tinggi. Istirahat wajib segera dilakukan. Kurangi intensitas pekerjaan dan hubungi pengawas Manajemen Mutu dan K3L jika keluhan menetap.";
+                recomHTML = `
+                    <div class="recom-item"><i class="fa-solid fa-triangle-exclamation" style="color: var(--red);"></i> Hentikan Pekerjaan Berisiko Tinggi</div>
+                    <div class="recom-item"><i class="fa-solid fa-user-shield" style="color: var(--red);"></i> Lapor ke Pengawas K3L / Atasan</div>
+                    <div class="recom-item"><i class="fa-solid fa-bed" style="color: var(--red);"></i> Lakukan Power Nap (Tidur Pemulihan)</div>
+                    <div class="recom-item"><i class="fa-solid fa-briefcase" style="color: var(--red);"></i> Evaluasi Beban Kerja Fisik/Mental</div>
+                `;
+            }
+
+            // Update Recommendations List
+            const recomContainer = document.getElementById('recom-list-container');
+            if (recomContainer) {
+                recomContainer.innerHTML = recomHTML;
             }
 
             // Update Circle SVG Progress
@@ -6024,6 +6031,26 @@
         function goToStep4() {
             fatigueUnlockedSteps[4] = true;
             setKelelahanStep(4);
+            const btn = document.getElementById('btn-method-action');
+            if (btn) {
+                if (fatigueUnlockedSteps[3]) {
+                    btn.innerHTML = 'Mulai Ulang <i class="fa-solid fa-rotate-right" style="margin-left: 8px;"></i>';
+                    btn.onclick = resetKelelahanForm;
+                } else {
+                    btn.innerHTML = '<i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> Kembali';
+                    btn.onclick = returnFromMethod;
+                }
+            }
+        }
+
+        function returnFromMethod() {
+            if (fatigueUnlockedSteps[3]) {
+                setKelelahanStep(3);
+            } else if (fatigueUnlockedSteps[2]) {
+                setKelelahanStep(2);
+            } else {
+                setKelelahanStep(1);
+            }
         }
 
         function toggleAccordionItem(num) {
