@@ -231,8 +231,7 @@
         }
 
         .hero-content {
-            max-width: 100%;
-            padding: 0 30px;
+            max-width: 1200px;
             z-index: 10;
             margin: 0 auto;
             display: flex;
@@ -396,7 +395,7 @@
         }
 
         .container {
-            max-width: 100%;
+            max-width: 1240px;
             margin: 0 auto;
             padding: 0 30px;
             width: 100%;
@@ -407,7 +406,7 @@
         #consultation .container,
         #bmi-kalkulator .container,
         #tips .container {
-            max-width: 100%;
+            max-width: 1500px;
             padding: 0 30px;
         }
 
@@ -1441,7 +1440,7 @@
             padding: 24px 32px;
             box-shadow: var(--shadow);
             margin-bottom: 30px;
-            max-width: 100%;
+            max-width: 1440px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -3426,7 +3425,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
-            max-width: 100%;
+            max-width: 1240px;
             margin: 0 auto;
         }
 
@@ -6320,30 +6319,25 @@
             }
         }
 
-        /* Make layout wider on large screens (Monitors & TVs) to reduce empty side margins */
-        @media (min-width: 1440px) {
-            .container {
-                max-width: 100% !important;
+        /* Make layout scale up proportionally on large screens (Monitors & TVs) */
+        @media (min-width: 1600px) {
+            body {
+                zoom: 1.15;
             }
-
-            #fatigue-test .container,
-            #consultation .container,
-            #bmi-kalkulator .container {
-                max-width: 100% !important;
+        }
+        @media (min-width: 1920px) {
+            body {
+                zoom: 1.35;
             }
-
-            .bmi-container,
-            .fatigue-grid,
-            .consult-grid-main {
-                max-width: 100% !important;
+        }
+        @media (min-width: 2560px) {
+            body {
+                zoom: 1.8;
             }
-
-            .hero-content {
-                max-width: 100% !important;
-            }
-
-            .hero p {
-                max-width: 1000px !important;
+        }
+        @media (min-width: 3840px) {
+            body {
+                zoom: 2.5;
             }
         }
 
