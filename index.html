@@ -27,6 +27,7 @@
             --tm: #4B5563;
             --glass: rgba(255, 255, 255, 0.8);
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --header-height: calc(60px + env(safe-area-inset-top));
         }
 
 
@@ -107,7 +108,7 @@
         /* HEADER */
         header {
             background: rgba(255, 255, 255, 0.97);
-            height: calc(60px + env(safe-area-inset-top));
+            height: var(--header-height);
             padding-top: env(safe-area-inset-top);
             padding-left: env(safe-area-inset-left);
             padding-right: env(safe-area-inset-right);
@@ -202,18 +203,18 @@
         nav {
             display: flex;
             position: fixed;
-            top: 0;
+            top: var(--header-height);
             right: -320px;
             left: auto;
             width: 280px;
-            height: 100vh;
+            height: calc(100vh - var(--header-height));
             background: rgba(11, 31, 58, 0.98);
             /* Navy background to sync with web */
             backdrop-filter: blur(10px);
             border-left: 1px solid rgba(255, 255, 255, 0.05);
             flex-direction: column;
             margin: 0;
-            padding: calc(80px + env(safe-area-inset-top)) 20px 30px;
+            padding: 24px 20px 30px;
             gap: 8px;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             visibility: hidden;
@@ -1358,8 +1359,12 @@
         }
 
         @media (max-width: 1024px) {
+            :root {
+                --header-height: 70px;
+            }
+
             header {
-                height: 70px;
+                height: var(--header-height);
             }
 
             .header-container {
@@ -2467,8 +2472,8 @@
             }
 
             nav {
-                top: 60px;
-                height: calc(100vh - 60px);
+                top: var(--header-height);
+                height: calc(100vh - var(--header-height));
                 padding: 30px 20px;
                 gap: 8px;
             }
@@ -3169,8 +3174,12 @@
 
         /* HEADER MOBILE OPTIMIZATION (ALL BRANDS) */
         @media (max-width: 768px) {
+            :root {
+                --header-height: calc(70px + env(safe-area-inset-top));
+            }
+
             header {
-                height: calc(70px + env(safe-area-inset-top)) !important;
+                height: var(--header-height) !important;
             }
 
             .header-container {
@@ -3208,8 +3217,12 @@
         }
 
         @media (max-width: 480px) {
+            :root {
+                --header-height: calc(60px + env(safe-area-inset-top));
+            }
+
             header {
-                height: calc(60px + env(safe-area-inset-top)) !important;
+                height: var(--header-height) !important;
             }
 
             .header-container {
@@ -3300,6 +3313,16 @@
                 </div>
             </div>
         </div>
+        <nav>
+            <a href="javascript:void(0)" onclick="scrollToId('top')">Beranda</a>
+            <a href="javascript:void(0)" onclick="scrollToId('timer')">Timer 20-20-20</a>
+            <a href="javascript:void(0)" onclick="scrollToId('tips')">Tips K3</a>
+            <a href="javascript:void(0)" onclick="scrollToId('campaign')">Kampanye K3</a>
+            <a href="javascript:void(0)" onclick="scrollToId('stretching-video')">Peregangan</a>
+            <a href="javascript:void(0)" onclick="scrollToId('fatigue-test')">Tes Kelelahan</a>
+            <a href="javascript:void(0)" onclick="scrollToId('bmi-kalkulator')">Kalkulator BMI</a>
+            <a href="javascript:void(0)" onclick="scrollToId('consultation')">Konsultasi</a>
+        </nav>
     </header>
 
     <section class="hero" id="top">
@@ -3378,7 +3401,7 @@
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <i class="fa-solid fa-volume-high" style="font-size: 12px; opacity: 0.5;"></i>
                                 <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5"
-                                    style="flex: 1;" oninput="saveState()">
+                                    style="flex: 1;" oninput="updateVolume()">
                             </div>
                         </div>
                         <div class="alarm-col" style="flex: 0; min-width: 100px; justify-content: flex-end;">
@@ -5653,6 +5676,9 @@
         // TIMER LOGIC
         function toggleTimer() {
             initAudio(); // Initialize audio on user gesture
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
             if (state.running) {
                 timerWorker.postMessage('stop');
                 releaseWakeLock();
@@ -5904,11 +5930,22 @@
         let activeOscillators = [];
 
         function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            } catch (e) {
+                console.warn('AudioContext not supported or blocked:', e);
             }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
+        }
+
+        function updateVolume() {
+            saveState();
+            if (activeAudio) {
+                activeAudio.volume = parseFloat(state.volume);
             }
         }
 
@@ -5975,6 +6012,7 @@
         // DRAGGABLE FT (Touch + Mouse & Boundary Restricted)
         const ft = document.getElementById('ft');
         let isDragging = false;
+        let dragTicking = false;
         let startX, startY, startLeft, startTop;
 
         function getZoom() {
@@ -6010,29 +6048,34 @@
             if (!isDragging) return;
             if (e.cancelable && e.type.includes('touch')) e.preventDefault(); // Prevent scrolling
 
-            const zoom = getZoom();
-            const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-            const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            if (!dragTicking) {
+                const zoom = getZoom();
+                const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
 
-            // Physical displacement divided by zoom factor
-            const dx = (clientX - startX) / zoom;
-            const dy = (clientY - startY) / zoom;
+                const dx = (clientX - startX) / zoom;
+                const dy = (clientY - startY) / zoom;
 
-            let newLeft = startLeft + dx;
-            let newTop = startTop + dy;
+                let newLeft = startLeft + dx;
+                let newTop = startTop + dy;
 
-            // Constrain with zoom-aware max boundaries
-            const maxLeft = (window.innerWidth / zoom) - ft.offsetWidth;
-            const maxTop = (window.innerHeight / zoom) - ft.offsetHeight;
+                const maxLeft = (window.innerWidth / zoom) - ft.offsetWidth;
+                const maxTop = (window.innerHeight / zoom) - ft.offsetHeight;
 
-            newLeft = Math.max(0, Math.min(newLeft, maxLeft));
-            newTop = Math.max(0, Math.min(newTop, maxTop));
+                newLeft = Math.max(0, Math.min(newLeft, maxLeft));
+                newTop = Math.max(0, Math.min(newTop, maxTop));
 
-            requestAnimationFrame(() => {
-                if (!isDragging) return;
-                ft.style.left = newLeft + 'px';
-                ft.style.top = newTop + 'px';
-            });
+                requestAnimationFrame(() => {
+                    if (!isDragging) {
+                        dragTicking = false;
+                        return;
+                    }
+                    ft.style.left = newLeft + 'px';
+                    ft.style.top = newTop + 'px';
+                    dragTicking = false;
+                });
+                dragTicking = true;
+            }
         }
 
         function endDrag(e) {
@@ -6509,10 +6552,6 @@
             // Kelelahan assessment initialization
             renderQPage();
             loadKelelahanHistory();
-
-            if ('Notification' in window) {
-                Notification.requestPermission();
-            }
         };
         // ==========================================
         // BMI CALCULATOR LOGIC
