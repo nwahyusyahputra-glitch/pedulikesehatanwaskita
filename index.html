@@ -5688,7 +5688,7 @@
         // BACKGROUND AUDIO WAKE LOCK
         const silentAudio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA");
         silentAudio.loop = true;
-        const alarmAudio = new Audio();
+        const alarmAudio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA");
 
         // WEB WORKER (Mencegah Throttling di Background Tab)
         const workerBlob = new Blob([`
@@ -6005,8 +6005,11 @@
         let audioTimeout = null;
 
         function stopAllSounds() {
-            alarmAudio.pause();
-            alarmAudio.currentTime = 0;
+            try {
+                alarmAudio.pause();
+                alarmAudio.currentTime = 0;
+            } catch (e) {}
+            
             if (audioTimeout) {
                 clearTimeout(audioTimeout);
                 audioTimeout = null;
