@@ -3864,12 +3864,10 @@
                             <div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
                                 <button type="button" class="btn btn-ghost" onclick="goToStep4()"
                                     style="flex: 1; min-width: 200px; padding: 12px; font-size: 13px; border-radius: 10px; border: 1.5px solid var(--gm); color: var(--navy); font-weight: 800;">Lihat
-                                    Metode & Referensi <i class="fa-solid fa-book-open"
-                                        style="margin-left: 8px;"></i></button>
+                                    Metode & Referensi</button>
                                 <button type="button" class="btn btn-red" onclick="goToStep2()"
                                     style="flex: 1; min-width: 200px; padding: 12px; font-size: 13px; border-radius: 10px;">Lanjut
-                                    ke Kuesioner <i class="fa-solid fa-arrow-right"
-                                        style="margin-left: 8px;"></i></button>
+                                    ke Kuesioner</button>
                             </div>
                         </form>
                     </div>
@@ -3909,15 +3907,13 @@
                         <div
                             style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; background: #F8FAFC; padding: 12px 20px; border-radius: 10px; border: 1.5px solid var(--gm);">
                             <button type="button" class="btn-prev" onclick="prevQPage()"
-                                style="background: none; border: none; font-weight: 800; color: var(--navy); cursor: pointer; font-size: 13px;"><i
-                                    class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i> Kembali</button>
+                                style="background: none; border: none; font-weight: 800; color: var(--navy); cursor: pointer; font-size: 13px;">Kembali</button>
                             <div style="display: flex; gap: 10px;">
                                 <button type="button" onclick="resetKelelahanForm()"
                                     style="background: none; border: none; font-weight: 800; color: var(--tm); cursor: pointer; font-size: 13px;">Atur
                                     Ulang</button>
                                 <button type="button" class="btn-next" onclick="nextQPage()"
-                                    style="background: var(--red); color: white; border: none; font-weight: 800; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px;">Berikutnya
-                                    <i class="fa-solid fa-arrow-right"></i></button>
+                                    style="background: var(--red); color: white; border: none; font-weight: 800; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center;">Berikutnya</button>
                             </div>
                         </div>
                     </div>
@@ -3967,14 +3963,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="margin-top: 25px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 15px;">
+                            <div style="margin-top: 25px; display: flex; justify-content: space-between; gap: 15px;">
                                 <button type="button" class="btn btn-ghost" onclick="resetKelelahanForm()"
-                                    style="padding: 10px; font-size: 12px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.3); font-weight: 800; color: white;"><i
-                                        class="fa-solid fa-rotate-left" style="margin-right: 6px;"></i> Uji
+                                    style="padding: 10px; font-size: 12px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.3); font-weight: 800; color: white; flex: 1;">Uji
                                     Kembali</button>
                                 <button type="button" class="btn btn-red" onclick="goToStep4()"
-                                    style="padding: 10px; font-size: 12px; border-radius: 8px; font-weight: 800; background: var(--red); color: white;"><i
-                                        class="fa-solid fa-graduation-cap" style="margin-right: 6px;"></i> Lihat Dasar
+                                    style="padding: 10px; font-size: 12px; border-radius: 8px; font-weight: 800; background: var(--red); color: white; flex: 1.2;">Lihat Dasar
                                     Metode</button>
                             </div>
                         </div>
@@ -4167,8 +4161,7 @@
                         <div style="margin-top: 30px; text-align: center;">
                             <button id="btn-method-action" class="btn btn-red" type="button"
                                 style="width: 100%; max-width: 250px; padding: 12px; font-size: 13px;"
-                                onclick="resetKelelahanForm()">Mulai Ulang <i class="fa-solid fa-rotate-right"
-                                    style="margin-left: 8px;"></i></button>
+                                onclick="resetKelelahanForm()">Mulai Ulang</button>
                         </div>
                     </div>
                 </div>
@@ -5071,10 +5064,9 @@
                             </div>
                         </div>
                         <div style="display: flex; gap: 12px; margin-top: 10px;">
-                            <button type="submit" class="bmi-btn-primary" style="margin-top: 0; flex: 2;"><i
-                                    class="fa-solid fa-calculator"></i> Hitung BMI</button>
+                            <button type="submit" class="bmi-btn-primary" style="margin-top: 0; flex: 2;">Hitung BMI</button>
                             <button type="button" class="bmi-btn-secondary" style="margin-top: 0; flex: 1.1;"
-                                onclick="resetBMI()"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+                                onclick="resetBMI()">Reset</button>
                         </div>
                     </form>
                     <div
@@ -6311,9 +6303,9 @@
             const btnNext = document.querySelector('#fatigue-step-questions .btn-next');
             if (btnNext) {
                 if (currentQuestionPage === 3) {
-                    btnNext.innerHTML = `Hitung Hasil <i class="fa-solid fa-square-poll-vertical" style="margin-left: 6px;"></i>`;
+                    btnNext.innerHTML = `Hitung Hasil`;
                 } else {
-                    btnNext.innerHTML = `Berikutnya <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>`;
+                    btnNext.innerHTML = `Berikutnya`;
                 }
             }
 
@@ -6488,10 +6480,10 @@
             const btn = document.getElementById('btn-method-action');
             if (btn) {
                 if (fatigueUnlockedSteps[3]) {
-                    btn.innerHTML = 'Mulai Ulang <i class="fa-solid fa-rotate-right" style="margin-left: 8px;"></i>';
+                    btn.innerHTML = 'Mulai Ulang';
                     btn.onclick = resetKelelahanForm;
                 } else {
-                    btn.innerHTML = '<i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> Kembali';
+                    btn.innerHTML = 'Kembali';
                     btn.onclick = returnFromMethod;
                 }
             }
