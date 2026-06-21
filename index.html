@@ -3968,7 +3968,8 @@
                                     style="padding: 10px; font-size: 12px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.3); font-weight: 800; color: white; flex: 1;">Uji
                                     Kembali</button>
                                 <button type="button" class="btn btn-red" onclick="goToStep4()"
-                                    style="padding: 10px; font-size: 12px; border-radius: 8px; font-weight: 800; background: var(--red); color: white; flex: 1.2;">Lihat Dasar
+                                    style="padding: 10px; font-size: 12px; border-radius: 8px; font-weight: 800; background: var(--red); color: white; flex: 1.2;">Lihat
+                                    Dasar
                                     Metode</button>
                             </div>
                         </div>
@@ -5064,7 +5065,8 @@
                             </div>
                         </div>
                         <div style="display: flex; gap: 12px; margin-top: 10px;">
-                            <button type="submit" class="bmi-btn-primary" style="margin-top: 0; flex: 2;">Hitung BMI</button>
+                            <button type="submit" class="bmi-btn-primary" style="margin-top: 0; flex: 2;">Hitung
+                                BMI</button>
                             <button type="button" class="bmi-btn-secondary" style="margin-top: 0; flex: 1.1;"
                                 onclick="resetBMI()">Reset</button>
                         </div>
@@ -5683,6 +5685,11 @@
             }
         });
 
+        // BACKGROUND AUDIO WAKE LOCK
+        const silentAudio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA");
+        silentAudio.loop = true;
+        const alarmAudio = new Audio();
+
         // WEB WORKER (Mencegah Throttling di Background Tab)
         const workerBlob = new Blob([`
             let timerId = null;
@@ -5707,10 +5714,12 @@
             if (state.running) {
                 timerWorker.postMessage('stop');
                 releaseWakeLock();
+                silentAudio.pause();
                 document.getElementById('btn-start').innerText = 'Lanjutkan';
             } else {
                 timerWorker.postMessage('start');
                 requestWakeLock();
+                silentAudio.play().catch(e => console.log('Silent audio blocked:', e));
                 document.getElementById('btn-start').innerText = 'Jeda';
             }
             state.running = !state.running;
@@ -5734,9 +5743,9 @@
                 state.sesi++;
                 playAlarm();
                 if (Notification.permission === 'granted') {
-                    new Notification("Waskita Peduli Kesehatan", { body: "Saatnya mengistirahatkan mata Anda.", icon: "https://www.waskita.co.id/favicon.ico" });
+                    new Notification("Waskita Peduli Kesehatan", { body: "Waktu istirahat! Saatnya mengistirahatkan mata Anda.", icon: "https://www.waskita.co.id/favicon.ico" });
                 }
-                
+
                 // Jeda 3 detik sebelum masuk istirahat 20 detik
                 setTimeout(() => {
                     startBreak();
@@ -5746,7 +5755,10 @@
                 state.isBreak = false;
                 playAlarm();
                 updateDasbor();
-                
+                if (Notification.permission === 'granted') {
+                    new Notification("Waskita Peduli Kesehatan", { body: "Istirahat selesai! Kembali bekerja dengan fokus.", icon: "https://www.waskita.co.id/favicon.ico" });
+                }
+
                 // Jeda 3 detik sebelum mulai otomatis sesi 20 menit berikutnya
                 setTimeout(() => {
                     state.seconds = 20 * 60;
@@ -5971,6 +5983,8 @@
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
+                silentAudio.play().then(() => { silentAudio.pause(); silentAudio.currentTime = 0; }).catch(() => {});
+                alarmAudio.play().then(() => { alarmAudio.pause(); alarmAudio.currentTime = 0; }).catch(() => {});
             } catch (e) {
                 console.warn('AudioContext not supported or blocked:', e);
             }
@@ -5978,20 +5992,14 @@
 
         function updateVolume() {
             saveState();
-            if (activeAudio) {
-                activeAudio.volume = parseFloat(state.volume);
-            }
+            alarmAudio.volume = parseFloat(state.volume);
         }
 
-        let activeAudio = null;
         let audioTimeout = null;
 
         function stopAllSounds() {
-            if (activeAudio) {
-                activeAudio.pause();
-                activeAudio.currentTime = 0;
-                activeAudio = null;
-            }
+            alarmAudio.pause();
+            alarmAudio.currentTime = 0;
             if (audioTimeout) {
                 clearTimeout(audioTimeout);
                 audioTimeout = null;
@@ -6014,10 +6022,10 @@
 
             // Normal audio playback
             const soundUrl = SOUNDS[type] || SOUNDS.radar;
-            activeAudio = new Audio(soundUrl);
-            activeAudio.volume = vol;
-            activeAudio.loop = true;
-            activeAudio.play().catch(e => console.log('Audio play failed:', e));
+            alarmAudio.src = soundUrl;
+            alarmAudio.volume = vol;
+            alarmAudio.loop = true;
+            alarmAudio.play().catch(e => console.log('Audio play failed:', e));
 
             // Ensure Web Audio API context is active
             if (audioCtx) {
