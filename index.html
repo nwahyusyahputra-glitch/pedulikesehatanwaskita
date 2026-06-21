@@ -4243,7 +4243,7 @@
         }
 
         .consult-card.featured {
-            background: var(--navy);
+            background: linear-gradient(rgba(11, 31, 58, 0.85), rgba(11, 31, 58, 0.85)), url('assets/pngtree-the-room-in-a-medical-clinic-is-red-and-clean-image_2609582.jpg') center/cover no-repeat;
             color: white;
             border: none;
             display: flex;
@@ -4768,6 +4768,32 @@
                 background: rgba(11, 31, 58, 0.2);
             }
 
+            .res-bubble-scroll::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .res-bubble-scroll::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .res-bubble-scroll::-webkit-scrollbar-thumb {
+                background: rgba(11, 31, 58, 0.15);
+                border-radius: 3px;
+            }
+
+            .res-bubble-scroll::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .res-bubble-scroll::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .res-bubble-scroll::-webkit-scrollbar-thumb {
+                background: rgba(11, 31, 58, 0.15);
+                border-radius: 3px;
+            }
+
             .bmi-form-row {
                 margin-bottom: 10px;
                 gap: 10px;
@@ -5061,7 +5087,7 @@
                 </div>
 
                 <!-- Result -->
-                <div class="bmi-card">
+                <div class="bmi-card" style="max-height: 580px;">
                     <div id="bmi-empty-state" style="text-align: center; margin: auto; padding: 40px 20px;">
                         <div
                             style="width: 80px; height: 80px; background: var(--gl); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
@@ -5579,6 +5605,13 @@
                 ft.classList.add('ft-hidden');
             } else {
                 ft.classList.add(`ft-${val}`);
+                // Reset inline position so it relies on CSS bottom/right until dragged
+                ft.style.left = '';
+                ft.style.top = '';
+                ft.style.right = '';
+                ft.style.bottom = '';
+                ft.style.margin = '';
+                if (typeof hasDragged !== 'undefined') hasDragged = false;
             }
         }
 
@@ -5702,6 +5735,8 @@
         function handleTimerEnd() {
             timerWorker.postMessage('stop');
             state.running = false;
+            state.seconds = 0;
+            updateDisplay(); // Tetap di 00:00 selama jeda
 
             if (!state.isBreak) {
                 state.sesi++;
@@ -5709,22 +5744,29 @@
                 if (Notification.permission === 'granted') {
                     new Notification("Waskita Peduli Kesehatan", { body: "Saatnya mengistirahatkan mata Anda.", icon: "https://www.waskita.co.id/favicon.ico" });
                 }
-                // Langsung masuk break 20 detik tanpa popup
-                startBreak();
+                
+                // Jeda 3 detik sebelum masuk istirahat 20 detik
+                setTimeout(() => {
+                    startBreak();
+                }, 3000);
             } else {
                 state.breaks++;
                 state.isBreak = false;
-                state.seconds = 20 * 60;
-                state.totalSeconds = 20 * 60;
                 playAlarm();
                 updateDasbor();
-                // Langsung reset 20 menit lagi otomatis
-                state.running = true;
-                timerWorker.postMessage('start');
-                document.getElementById('btn-start').innerText = 'Jeda';
+                
+                // Jeda 3 detik sebelum mulai otomatis sesi 20 menit berikutnya
+                setTimeout(() => {
+                    state.seconds = 20 * 60;
+                    state.totalSeconds = 20 * 60;
+                    state.running = true;
+                    timerWorker.postMessage('start');
+                    document.getElementById('btn-start').innerText = 'Jeda';
+                    saveState();
+                    updateDisplay();
+                }, 3000);
             }
             saveState();
-            updateDisplay();
             updateDasbor();
         }
 
@@ -6012,6 +6054,7 @@
         // DRAGGABLE FT (Touch + Mouse & Boundary Restricted)
         const ft = document.getElementById('ft');
         let isDragging = false;
+        let hasDragged = false;
         let dragTicking = false;
         let startX, startY, startLeft, startTop;
 
@@ -6022,6 +6065,7 @@
         function startDrag(e) {
             if (e.target.closest('.ft-close-btn')) return; // Ignore if clicking close
             isDragging = true;
+            hasDragged = true;
 
             const zoom = getZoom();
             const rect = ft.getBoundingClientRect();
@@ -6093,7 +6137,7 @@
         window.addEventListener('touchend', endDrag);
 
         window.addEventListener('resize', () => {
-            if (!ft.classList.contains('ft-hidden')) {
+            if (!ft.classList.contains('ft-hidden') && hasDragged) {
                 const zoom = getZoom();
                 const rect = ft.getBoundingClientRect();
 
