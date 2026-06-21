@@ -5975,7 +5975,11 @@
         let audioCtx = null;
         let activeOscillators = [];
 
+        let isAudioInitialized = false;
+
         function initAudio() {
+            if (isAudioInitialized) return;
+            isAudioInitialized = true;
             try {
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -5983,8 +5987,11 @@
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
-                silentAudio.play().then(() => { silentAudio.pause(); silentAudio.currentTime = 0; }).catch(() => {});
-                alarmAudio.play().then(() => { alarmAudio.pause(); alarmAudio.currentTime = 0; }).catch(() => {});
+                silentAudio.play().catch(() => {});
+                silentAudio.pause();
+                
+                alarmAudio.play().catch(() => {});
+                alarmAudio.pause();
             } catch (e) {
                 console.warn('AudioContext not supported or blocked:', e);
             }
