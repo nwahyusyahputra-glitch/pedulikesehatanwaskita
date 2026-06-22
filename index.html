@@ -5714,17 +5714,53 @@
         // WEB WORKER (Mencegah Throttling di Background Tab)
         const workerBlob = new Blob([`
             let timerId = null;
+            let audioTimeoutId = null;
+            let sessionTimeoutId = null;
             self.onmessage = function(e) {
                 if (e.data === 'start') {
                     if(!timerId) timerId = setInterval(() => self.postMessage('tick'), 1000);
                 } else if (e.data === 'stop') {
                     clearInterval(timerId);
                     timerId = null;
+                } else if (e.data.type === 'setAudioTimeout') {
+                    if (audioTimeoutId) clearTimeout(audioTimeoutId);
+                    audioTimeoutId = setTimeout(() => {
+                        self.postMessage({action: 'stopAlarm'});
+                        audioTimeoutId = null;
+                    }, e.data.delay);
+                } else if (e.data.type === 'setSessionTimeout') {
+                    if (sessionTimeoutId) clearTimeout(sessionTimeoutId);
+                    sessionTimeoutId = setTimeout(() => {
+                        self.postMessage({action: e.data.action});
+                        sessionTimeoutId = null;
+                    }, e.data.delay);
+                } else if (e.data === 'clearAudioTimeout') {
+                    if (audioTimeoutId) clearTimeout(audioTimeoutId);
+                    audioTimeoutId = null;
+                } else if (e.data === 'clearSessionTimeout') {
+                    if (sessionTimeoutId) clearTimeout(sessionTimeoutId);
+                    sessionTimeoutId = null;
                 }
             }
         `], { type: 'application/javascript' });
         const timerWorker = new Worker(URL.createObjectURL(workerBlob));
-        timerWorker.onmessage = function (e) { if (e.data === 'tick') tick(); };
+        timerWorker.onmessage = function (e) { 
+            if (e.data === 'tick') {
+                tick(); 
+            } else if (e.data.action === 'startBreak') {
+                startBreak();
+            } else if (e.data.action === 'startSession') {
+                state.seconds = 20 * 60;
+                state.totalSeconds = 20 * 60;
+                state.running = true;
+                timerWorker.postMessage('start');
+                document.getElementById('btn-start').innerText = 'Jeda';
+                saveState();
+                updateDisplay();
+            } else if (e.data.action === 'stopAlarm') {
+                stopAllSounds();
+            }
+        };
 
         // TIMER LOGIC
         function toggleTimer() {
@@ -5768,9 +5804,7 @@
                 }
 
                 // Jeda 3 detik sebelum masuk istirahat 20 detik
-                setTimeout(() => {
-                    startBreak();
-                }, 3000);
+                timerWorker.postMessage({type: 'setSessionTimeout', delay: 3000, action: 'startBreak'});
             } else {
                 state.breaks++;
                 state.isBreak = false;
@@ -5781,15 +5815,7 @@
                 }
 
                 // Jeda 3 detik sebelum mulai otomatis sesi 20 menit berikutnya
-                setTimeout(() => {
-                    state.seconds = 20 * 60;
-                    state.totalSeconds = 20 * 60;
-                    state.running = true;
-                    timerWorker.postMessage('start');
-                    document.getElementById('btn-start').innerText = 'Jeda';
-                    saveState();
-                    updateDisplay();
-                }, 3000);
+                timerWorker.postMessage({type: 'setSessionTimeout', delay: 3000, action: 'startSession'});
             }
             saveState();
             updateDasbor();
@@ -5835,6 +5861,7 @@
 
         function resetTimer() {
             timerWorker.postMessage('stop');
+            timerWorker.postMessage('clearSessionTimeout');
             releaseWakeLock();
             stopAllSounds(); // Stop alarm if playing
             state.running = false;
@@ -6035,6 +6062,7 @@
                 clearTimeout(audioTimeout);
                 audioTimeout = null;
             }
+            timerWorker.postMessage('clearAudioTimeout');
             if (activeOscillators && activeOscillators.length > 0) {
                 activeOscillators.forEach(o => {
                     if (o.stop) try { o.stop(); } catch (e) { }
@@ -6065,9 +6093,7 @@
 
             const stopTime = dur === -1 ? 15000 : dur * 1000;
 
-            audioTimeout = setTimeout(() => {
-                stopAllSounds();
-            }, stopTime);
+            timerWorker.postMessage({type: 'setAudioTimeout', delay: stopTime});
 
             saveState();
         }
