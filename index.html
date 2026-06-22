@@ -5744,12 +5744,13 @@
             }
         `], { type: 'application/javascript' });
         const timerWorker = new Worker(URL.createObjectURL(workerBlob));
-        timerWorker.onmessage = function (e) { 
+        timerWorker.onmessage = function (e) {
             if (e.data === 'tick') {
-                tick(); 
+                tick();
             } else if (e.data.action === 'startBreak') {
                 startBreak();
             } else if (e.data.action === 'startSession') {
+                stopAllSounds();
                 state.seconds = 20 * 60;
                 state.totalSeconds = 20 * 60;
                 state.running = true;
@@ -5761,6 +5762,17 @@
                 stopAllSounds();
             }
         };
+
+        // Allow dismissing alarm by clicking anywhere on the web
+        document.addEventListener('click', (e) => {
+            // Stop alarm if the user clicks anywhere (acts as a global dismiss)
+            // But only if we aren't clicking something that intrinsically handles it.
+            // Since stopAllSounds() is safe to call, we can just call it to silence any active alarms.
+            // We check if alarmAudio is playing to avoid unnecessary calls.
+            if (alarmAudio && !alarmAudio.paused && alarmAudio.currentTime > 0) {
+                stopAllSounds();
+            }
+        });
 
         // TIMER LOGIC
         function toggleTimer() {
@@ -5797,6 +5809,8 @@
             updateDisplay(); // Tetap di 00:00 selama jeda
 
             if (!state.isBreak) {
+                showPopup();
+
                 state.sesi++;
                 playAlarm();
                 if (Notification.permission === 'granted') {
@@ -5804,7 +5818,7 @@
                 }
 
                 // Jeda 3 detik sebelum masuk istirahat 20 detik
-                timerWorker.postMessage({type: 'setSessionTimeout', delay: 3000, action: 'startBreak'});
+                timerWorker.postMessage({ type: 'setSessionTimeout', delay: 3000, action: 'startBreak' });
             } else {
                 state.breaks++;
                 state.isBreak = false;
@@ -5815,7 +5829,7 @@
                 }
 
                 // Jeda 3 detik sebelum mulai otomatis sesi 20 menit berikutnya
-                timerWorker.postMessage({type: 'setSessionTimeout', delay: 3000, action: 'startSession'});
+                timerWorker.postMessage({ type: 'setSessionTimeout', delay: 3000, action: 'startSession' });
             }
             saveState();
             updateDasbor();
@@ -5823,6 +5837,9 @@
 
         function startBreak() {
             hidePopup();
+            stopAllSounds();
+            timerWorker.postMessage('clearSessionTimeout');
+
             state.isBreak = true;
             state.seconds = 20;
             state.totalSeconds = 20;
@@ -5835,6 +5852,9 @@
 
         function postponeBreak() {
             hidePopup();
+            stopAllSounds();
+            timerWorker.postMessage('clearSessionTimeout');
+
             state.seconds = 60;
             state.totalSeconds = 60;
             state.running = true;
@@ -5846,6 +5866,9 @@
 
         function skipBreak() {
             hidePopup();
+            stopAllSounds();
+            timerWorker.postMessage('clearSessionTimeout');
+
             state.isBreak = false;
             state.seconds = 20 * 60;
             state.totalSeconds = 20 * 60;
@@ -6093,7 +6116,7 @@
 
             const stopTime = dur === -1 ? 15000 : dur * 1000;
 
-            timerWorker.postMessage({type: 'setAudioTimeout', delay: stopTime});
+            timerWorker.postMessage({ type: 'setAudioTimeout', delay: stopTime });
 
             saveState();
         }
