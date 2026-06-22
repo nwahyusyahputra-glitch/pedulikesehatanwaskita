@@ -1830,6 +1830,8 @@
             color: var(--td);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             outline: none;
+            width: 100%;
+            height: 40px;
         }
 
         .form-control:focus {
@@ -5563,6 +5565,7 @@
             breaks: 0,
             history: [0, 0, 0, 0, 0],
             lastResetWeek: null,
+            lastActiveDate: null,
             sound: 'radar',
             volume: 0.5,
             duration: 5,
@@ -5580,6 +5583,7 @@
             if (document.getElementById('ft-model-select')) {
                 state.ftModel = document.getElementById('ft-model-select').value;
             }
+            state.lastActiveDate = new Date().toISOString().split('T')[0];
 
             const dataToSave = { ...state, running: false };
             localStorage.setItem('waskita_digital_simfoni_v1', JSON.stringify(dataToSave));
@@ -5636,6 +5640,18 @@
                     saveState();
                 }
 
+                // Reset logic for session and day change
+                const todayStr = new Date().toISOString().split('T')[0];
+                const sessionActive = sessionStorage.getItem('waskita_session_active');
+
+                if (!sessionActive || state.lastActiveDate !== todayStr) {
+                    state.sesi = 0;
+                    state.breaks = 0;
+                    state.lastActiveDate = todayStr;
+                    sessionStorage.setItem('waskita_session_active', 'true');
+                    saveState();
+                }
+
                 document.getElementById('sound-select').value = state.sound || 'radar';
                 document.getElementById('volume-slider').value = state.volume || 0.5;
                 document.getElementById('duration-select').value = state.duration || 5;
@@ -5646,6 +5662,11 @@
                 }
             } else {
                 // Initialize default
+                const todayStr = new Date().toISOString().split('T')[0];
+                state.lastActiveDate = todayStr;
+                sessionStorage.setItem('waskita_session_active', 'true');
+                saveState();
+
                 if (document.getElementById('ft-model-select')) {
                     updateFloatingTimerStyle();
                 }
@@ -5987,10 +6008,10 @@
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
-                silentAudio.play().catch(() => {});
+                silentAudio.play().catch(() => { });
                 silentAudio.pause();
-                
-                alarmAudio.play().catch(() => {});
+
+                alarmAudio.play().catch(() => { });
                 alarmAudio.pause();
             } catch (e) {
                 console.warn('AudioContext not supported or blocked:', e);
@@ -6008,8 +6029,8 @@
             try {
                 alarmAudio.pause();
                 alarmAudio.currentTime = 0;
-            } catch (e) {}
-            
+            } catch (e) { }
+
             if (audioTimeout) {
                 clearTimeout(audioTimeout);
                 audioTimeout = null;
