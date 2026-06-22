@@ -6094,6 +6094,9 @@
             try {
                 alarmAudio.pause();
                 alarmAudio.currentTime = 0;
+                // Forcefully detach the audio source if it gets stuck in mobile browsers
+                alarmAudio.removeAttribute('src');
+                alarmAudio.load();
             } catch (e) { }
 
             if (audioTimeout) {
@@ -6121,7 +6124,7 @@
             const soundUrl = SOUNDS[type] || SOUNDS.radar;
             alarmAudio.src = soundUrl;
             alarmAudio.volume = vol;
-            alarmAudio.loop = true;
+            alarmAudio.loop = false; // FITUR DIKURANGI: Matikan loop agar alarm otomatis berhenti setelah selesai 1x putaran
             
             let currentPlayId = audioPlayId;
             let playPromise = alarmAudio.play();
